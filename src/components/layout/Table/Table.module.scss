@@ -1,0 +1,49 @@
+.table {
+    background-color: black;
+
+    margin-top: 20px;
+    padding: 5px;
+    width: 100%;
+
+    color: white;
+    text-align: center;
+    font-size: 14px;
+
+    thead {
+        font-weight: bold;
+    }
+
+    tbody {
+        tr {
+            cursor: pointer;
+
+            &:hover {
+                td:first-of-type {
+                    text-decoration-line: underline;
+                }
+            }
+
+            td {
+                font-size: 12px;
+            }
+        }
+    }
+
+    td {
+        padding: 5px;
+    }
+}
+
+@media (min-width: 800px) {
+    .table {
+        border-radius: 8px;
+
+        font-size: 16px;
+
+        tbody {
+            td {
+                font-size: 14px;
+            }
+        }
+    }
+}

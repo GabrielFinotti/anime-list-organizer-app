@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.scss";
+import Nav from "@/components/layout/Nav/Nav";
 
 export const metadata: Metadata = {
   title: "Anime List Organizer",
@@ -13,7 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body>{children}</body>
+      <body>
+        <header>
+          <Nav />
+        </header>
+        {children}
+      </body>
     </html>
   );
 }

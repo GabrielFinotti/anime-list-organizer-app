@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import style from "./Search.module.scss";
-import type { FormData } from "@/components/layout/forms/Form";
+import type { FormData } from "@/components/layout/Forms/Form";
 
 type Result = {
   name: string;
