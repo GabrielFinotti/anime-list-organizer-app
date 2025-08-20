@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import style from "./Search.module.scss";
+import type { FormData } from "@/components/layout/forms/Form";
 
 type Result = {
   name: string;
@@ -9,14 +10,14 @@ type Result = {
   category: string[];
   genre: string[];
   origin: string[];
+  namesOfOrigins?: string[];
   isMovie: boolean;
   isSerieContentAnyMovie?: boolean;
-  namesOfOrigins?: string[];
-  lastReleasedSeason?: number | null;
   moviesNames?: string[];
+  lastReleasedSeason?: number | null;
 };
 
-const Search = ({ onResult }: { onResult?: (data: Result) => void }) => {
+const Search = ({ onResult }: { onResult?: (data: Partial<FormData>) => void }) => {
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +44,28 @@ const Search = ({ onResult }: { onResult?: (data: Result) => void }) => {
 
       const data: Result = await res.json();
 
-      if (onResult) onResult(data);
+  if (onResult) {
+        const normalized: Partial<FormData> = {
+          name: data.name ?? "",
+          synopsis: data.synopsis ?? "Dados não encontrados",
+          category: Array.isArray(data.category) ? data.category : [],
+          genre: Array.isArray(data.genre) ? data.genre : [],
+          origin: Array.isArray(data.origin) ? data.origin : [],
+          namesOfOrigins: Array.isArray(data.namesOfOrigins)
+            ? data.namesOfOrigins.map((s) => s.trim()).filter((s) => s !== "")
+            : [],
+          isMovie: !!data.isMovie,
+          isSerieContentAnyMovie: data.isSerieContentAnyMovie,
+          ...(data.lastReleasedSeason !== undefined && data.lastReleasedSeason !== null
+            ? { lastReleasedSeason: data.lastReleasedSeason }
+            : {}),
+          moviesNames: Array.isArray(data.moviesNames) ? data.moviesNames : [],
+        };
+
+  onResult(normalized);
+
+  setQ("");
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
 

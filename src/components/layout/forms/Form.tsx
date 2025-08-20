@@ -10,6 +10,7 @@ export type FormData = {
   category: string[];
   genre: string[];
   origin: string[];
+  namesOfOrigins?: string[];
   isMovie: boolean;
   isSerieContentAnyMovie?: boolean;
   moviesNames?: string[];
@@ -50,16 +51,35 @@ const Form = ({ initialData }: { initialData?: Partial<FormData> }) => {
     if (Array.isArray(initialData.genre)) normalized.genre = initialData.genre;
 
     if (Array.isArray(initialData.origin) && initialData.origin.length > 0) {
-      normalized.origin = initialData.origin;
-    } else {
-      const maybeNames = (initialData as Record<string, unknown>)[
-        "namesOfOrigins"
-      ];
       if (
-        Array.isArray(maybeNames) &&
-        maybeNames.every((x) => typeof x === "string")
+        (initialData.origin as unknown[]).every((x) => typeof x === "string")
       ) {
-        normalized.origin = maybeNames as string[];
+        const cleanedOrigin = (initialData.origin as string[])
+          .map((s) => s.trim())
+          .filter((s) => s !== "");
+
+        if (cleanedOrigin.length > 0) normalized.origin = cleanedOrigin;
+      }
+    }
+
+    const maybeNames = (initialData as Record<string, unknown>)[
+      "namesOfOrigins"
+    ];
+
+    if (
+      Array.isArray(maybeNames) &&
+      maybeNames.every((x) => typeof x === "string")
+    ) {
+      const cleaned = (maybeNames as string[])
+        .map((s) => s.trim())
+        .filter((s) => s !== "");
+
+      if (cleaned.length > 0) {
+        normalized.namesOfOrigins = cleaned;
+
+        if (!normalized.origin || normalized.origin.length === 0) {
+          normalized.origin = cleaned;
+        }
       }
     }
 
@@ -72,6 +92,21 @@ const Form = ({ initialData }: { initialData?: Partial<FormData> }) => {
       normalized.lastReleasedSeason = initialData.lastReleasedSeason;
     if (Array.isArray(initialData.moviesNames))
       normalized.moviesNames = initialData.moviesNames;
+
+    if (normalized.isMovie === true) {
+      if (
+        normalized.lastWatchedSeason === undefined &&
+        initialData.lastWatchedSeason === undefined
+      ) {
+        normalized.lastWatchedSeason = 0;
+      }
+      if (
+        normalized.lastWatchedEpisode === undefined &&
+        initialData.lastWatchedEpisode === undefined
+      ) {
+        normalized.lastWatchedEpisode = 0;
+      }
+    }
 
     setForm((s) => ({ ...s, ...normalized } as FormData));
   }, [initialData]);
@@ -111,6 +146,8 @@ const Form = ({ initialData }: { initialData?: Partial<FormData> }) => {
     e.preventDefault();
 
     console.log("submit", form);
+
+    setForm({ ...emptyForm });
   }
 
   return (
