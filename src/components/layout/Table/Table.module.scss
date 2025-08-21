@@ -1,17 +1,20 @@
 .tableWrapper {
+    margin-top: 40px;
+
     width: 100%;
+    max-height: 750px;
+
     overflow-x: auto;
 
     table {
         background-color: black;
 
-        margin-top: 20px;
         padding: 5px;
         width: 100%;
 
         color: white;
         text-align: center;
-        font-size: 14px;
+        font-size: 16px;
 
         thead {
             font-weight: bold;
@@ -28,13 +31,13 @@
                 }
 
                 td {
-                    font-size: 12px;
+                    font-size: 14px;
                 }
             }
         }
 
         td {
-            padding: 5px;
+            padding: 10px 5px;
         }
     }
 }
@@ -44,11 +47,13 @@
         table {
             border-radius: 8px;
 
-            font-size: 16px;
+            font-size: 18px;
 
             tbody {
-                td {
-                    font-size: 14px;
+                tr {
+                    td {
+                        font-size: 16px;
+                    }
                 }
             }
         }
