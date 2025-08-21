@@ -1,48 +1,55 @@
-.table {
-    background-color: black;
-
-    margin-top: 20px;
-    padding: 5px;
+.tableWrapper {
     width: 100%;
+    overflow-x: auto;
 
-    color: white;
-    text-align: center;
-    font-size: 14px;
+    table {
+        background-color: black;
 
-    thead {
-        font-weight: bold;
-    }
+        margin-top: 20px;
+        padding: 5px;
+        width: 100%;
 
-    tbody {
-        tr {
-            cursor: pointer;
+        color: white;
+        text-align: center;
+        font-size: 14px;
 
-            &:hover {
-                td:first-of-type {
-                    text-decoration-line: underline;
+        thead {
+            font-weight: bold;
+        }
+
+        tbody {
+            tr {
+                cursor: pointer;
+
+                &:hover {
+                    td:first-of-type {
+                        text-decoration-line: underline;
+                    }
+                }
+
+                td {
+                    font-size: 12px;
                 }
             }
-
-            td {
-                font-size: 12px;
-            }
         }
-    }
 
-    td {
-        padding: 5px;
+        td {
+            padding: 5px;
+        }
     }
 }
 
 @media (min-width: 800px) {
-    .table {
-        border-radius: 8px;
+    .tableWrapper {
+        table {
+            border-radius: 8px;
 
-        font-size: 16px;
+            font-size: 16px;
 
-        tbody {
-            td {
-                font-size: 14px;
+            tbody {
+                td {
+                    font-size: 14px;
+                }
             }
         }
     }

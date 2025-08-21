@@ -124,7 +124,9 @@ const Form = ({ initialData }: { initialData?: Partial<FormData> }) => {
 
     if (target instanceof HTMLInputElement && target.type === "number") {
       const v = target.value === "" ? undefined : Number(target.value);
+
       setForm((f) => ({ ...f, [name]: v } as unknown as FormData));
+
       return;
     }
 
@@ -136,6 +138,7 @@ const Form = ({ initialData }: { initialData?: Partial<FormData> }) => {
             [name]: (target as HTMLInputElement).checked,
           } as unknown as FormData)
       );
+
       return;
     }
 
@@ -145,9 +148,52 @@ const Form = ({ initialData }: { initialData?: Partial<FormData> }) => {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    console.log("submit", form);
+    const payload: Partial<FormData> = {
+      name: form.name,
+      synopsis: form.synopsis,
+      status: form.status,
+      category: Array.isArray(form.category) ? form.category : [],
+      genre: Array.isArray(form.genre) ? form.genre : [],
+      origin: Array.isArray(form.origin) ? form.origin : [],
+      namesOfOrigins: Array.isArray(form.namesOfOrigins)
+        ? form.namesOfOrigins
+        : [],
+      isMovie: Boolean(form.isMovie),
+      isSerieContentAnyMovie: Boolean(form.isSerieContentAnyMovie),
+      moviesNames: Array.isArray(form.moviesNames) ? form.moviesNames : [],
+      lastReleasedSeason:
+        form.lastReleasedSeason === undefined
+          ? undefined
+          : form.lastReleasedSeason,
+      lastWatchedSeason:
+        form.lastWatchedSeason === undefined
+          ? undefined
+          : form.lastWatchedSeason,
+      lastWatchedEpisode:
+        form.lastWatchedEpisode === undefined
+          ? undefined
+          : form.lastWatchedEpisode,
+    };
 
-    setForm({ ...emptyForm });
+    fetch("/api/anime", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          const t = await res.text();
+
+          throw new Error(t || "Erro ao criar");
+        }
+
+        setForm({ ...emptyForm });
+      })
+      .catch((err: unknown) => {
+        const msg = err instanceof Error ? err.message : String(err);
+
+        alert(msg);
+      });
   }
 
   return (

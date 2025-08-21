@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Form, { FormData } from "@/components/layout/Forms/Form";
+import Form, { FormData } from "@/components/layout/forms/Form";
 import Search from "@/components/ui/inputs/search/Search";
 
 const Page = () => {

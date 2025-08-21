@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import style from "./Search.module.scss";
-import type { FormData } from "@/components/layout/Forms/Form";
+import type { FormData } from "@/components/layout/forms/Form";
 
 type Result = {
   name: string;
@@ -87,7 +87,6 @@ const Search = ({ onResult }: { onResult?: (data: Partial<FormData>) => void }) 
       <button type="submit" disabled={loading}>
         {loading ? "Buscando..." : "Buscar Anime"}
       </button>
-      {error && <div role="alert">{error}</div>}
     </form>
   );
 };
