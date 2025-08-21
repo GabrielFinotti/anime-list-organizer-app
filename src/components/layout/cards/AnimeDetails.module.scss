@@ -1,0 +1,107 @@
+.animeDetails {
+    background-color: black;
+
+    margin-top: 40px;
+    padding: 20px;
+
+    color: white;
+
+    .mainData {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        div {
+            &:first-child {
+                h1 {
+                    padding-bottom: 10px;
+
+                    font-size: 22px;
+                }
+
+                p {
+                    text-align: justify;
+                    font-size: 16px;
+                }
+            }
+
+            &:last-child {
+                display: grid;
+                gap: 20px;
+                grid-template-columns: repeat(2, 1fr);
+
+                p {
+                    background-color: white;
+                    border-radius: 5px;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 5px;
+
+                    margin: auto;
+                    padding: 10px 20px;
+
+                    color: black;
+                    font-size: 16px;
+                    text-wrap: nowrap;
+
+                    span {
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+
+    .additionalData {
+        padding-top: 30px;
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+
+        p {
+            border: 2px solid white;
+            border-radius: 8px;
+
+            grid-column: span 4;
+
+            padding: 8px;
+
+            color: white;
+            font-size: 16px;
+        }
+    }
+}
+
+@media (min-width: 760px) {
+    .animeDetails {
+        .additionalData {
+            p {
+                grid-column: span 2;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .animeDetails {
+        .mainData {
+            flex-direction: row;
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    .animeDetails {
+        border-radius: 8px;
+
+        .additionalData {
+            p {
+                grid-column: span 1;
+            }
+        }
+    }
+}
