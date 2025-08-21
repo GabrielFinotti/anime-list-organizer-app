@@ -17,16 +17,19 @@ type Result = {
   lastReleasedSeason?: number | null;
 };
 
-const Search = ({ onResult }: { onResult?: (data: Partial<FormData>) => void }) => {
+const Search = ({
+  onResult,
+}: {
+  onResult?: (data: Partial<FormData>) => void;
+}) => {
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError(null);
 
-    if (!q.trim()) return setError("Digite o nome do anime.");
+    if (!q.trim()) return;
+
     setLoading(true);
 
     try {
@@ -44,7 +47,7 @@ const Search = ({ onResult }: { onResult?: (data: Partial<FormData>) => void }) 
 
       const data: Result = await res.json();
 
-  if (onResult) {
+      if (onResult) {
         const normalized: Partial<FormData> = {
           name: data.name ?? "",
           synopsis: data.synopsis ?? "Dados não encontrados",
@@ -56,20 +59,21 @@ const Search = ({ onResult }: { onResult?: (data: Partial<FormData>) => void }) 
             : [],
           isMovie: !!data.isMovie,
           isSerieContentAnyMovie: data.isSerieContentAnyMovie,
-          ...(data.lastReleasedSeason !== undefined && data.lastReleasedSeason !== null
+          ...(data.lastReleasedSeason !== undefined &&
+          data.lastReleasedSeason !== null
             ? { lastReleasedSeason: data.lastReleasedSeason }
             : {}),
           moviesNames: Array.isArray(data.moviesNames) ? data.moviesNames : [],
         };
 
-  onResult(normalized);
+        onResult(normalized);
 
-  setQ("");
+        setQ("");
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
 
-      setError(msg || "Erro desconhecido");
+      alert(msg);
     } finally {
       setLoading(false);
     }
