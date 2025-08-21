@@ -7,11 +7,10 @@ function isValidId(id: string) {
   return mongoose.isValidObjectId(id);
 }
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
+export async function GET(req: Request) {
+  const url = new URL(req.url);
+  const parts = url.pathname.split("/").filter(Boolean);
+  const id = parts[parts.length - 1] ?? "";
   if (!isValidId(id))
     return NextResponse.json({ error: "invalid id" }, { status: 400 });
 
@@ -33,11 +32,10 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
+export async function PUT(req: Request) {
+  const url = new URL(req.url);
+  const parts = url.pathname.split("/").filter(Boolean);
+  const id = parts[parts.length - 1] ?? "";
 
   if (!isValidId(id))
     return NextResponse.json({ error: "invalid id" }, { status: 400 });
@@ -77,11 +75,10 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
+export async function DELETE(req: Request) {
+  const url = new URL(req.url);
+  const parts = url.pathname.split("/").filter(Boolean);
+  const id = parts[parts.length - 1] ?? "";
 
   if (!isValidId(id))
     return NextResponse.json({ error: "invalid id" }, { status: 400 });

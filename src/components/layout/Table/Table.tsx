@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import style from "./Table.module.scss";
+import Link from "next/link";
 
 type Row = {
   _id: string;
@@ -112,7 +113,9 @@ const Table = () => {
           <tbody>
             {filteredRows.map((r) => (
               <tr key={r._id}>
-                <td>{r.name}</td>
+                <td>
+                  <Link href={`/list/${r._id}`}>{r.name}</Link>
+                </td>
                 <td>{r.status}</td>
                 <td>{(r.category || []).join(", ")}</td>
                 <td>{(r.genre || []).join(", ")}</td>

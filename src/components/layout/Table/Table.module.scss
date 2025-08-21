@@ -98,13 +98,20 @@
                 cursor: pointer;
 
                 &:hover {
-                    td:first-of-type {
-                        text-decoration-line: underline;
+                    td {
+                        a {
+                            text-decoration-line: underline;
+                        }
                     }
                 }
 
                 td {
                     font-size: 14px;
+
+                    a {
+                        color: inherit;
+                        text-decoration: none;
+                    }
                 }
             }
         }
