@@ -57,6 +57,18 @@
             background-color: black;
         }
     }
+
+    p {
+        background-color: white;
+        border-radius: 8px;
+
+        grid-column: span 4;
+
+        padding: 9px;
+
+        color: black;
+        text-align: center;
+    }
 }
 
 .tableWrapper {
@@ -110,6 +122,10 @@
         }
 
         select {
+            grid-column: span 2;
+        }
+
+        p {
             grid-column: span 2;
         }
     }

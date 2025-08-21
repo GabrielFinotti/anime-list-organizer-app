@@ -95,38 +95,37 @@ const Table = () => {
           <option value="novo">Mais novo primeiro</option>
           <option value="antigo">Mais antigo primeiro</option>
         </select>
+        <p>{filteredRows.length} animes encontrados</p>
       </div>
-      <div>
-        <div className={style.tableWrapper}>
-          <table>
-            <thead>
-              <tr>
-                <td>Nome</td>
-                <td>Estatus</td>
-                <td>Categorias</td>
-                <td>Gêneros</td>
-                <td>É um filme</td>
-                <td>Última atualização</td>
+      <div className={style.tableWrapper}>
+        <table>
+          <thead>
+            <tr>
+              <td>Nome</td>
+              <td>Estatus</td>
+              <td>Categorias</td>
+              <td>Gêneros</td>
+              <td>É um filme</td>
+              <td>Última atualização</td>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredRows.map((r) => (
+              <tr key={r._id}>
+                <td>{r.name}</td>
+                <td>{r.status}</td>
+                <td>{(r.category || []).join(", ")}</td>
+                <td>{(r.genre || []).join(", ")}</td>
+                <td>{r.isMovie ? "Sim" : "Não"}</td>
+                <td>
+                  {r.updatedAt
+                    ? new Date(r.updatedAt).toLocaleDateString("pt-BR")
+                    : "-"}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {filteredRows.map((r) => (
-                <tr key={r._id}>
-                  <td>{r.name}</td>
-                  <td>{r.status}</td>
-                  <td>{(r.category || []).join(", ")}</td>
-                  <td>{(r.genre || []).join(", ")}</td>
-                  <td>{r.isMovie ? "Sim" : "Não"}</td>
-                  <td>
-                    {r.updatedAt
-                      ? new Date(r.updatedAt).toLocaleDateString("pt-BR")
-                      : "-"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );
