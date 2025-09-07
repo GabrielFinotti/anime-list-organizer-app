@@ -1,0 +1,48 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    margin: auto;
+    margin-top: calc(50vh - 180px);
+    padding: 0 20px;
+    max-width: 550px;
+
+    h1 {
+        text-align: center;
+        font-size: 38px;
+        font-weight: 400;
+    }
+
+    input {
+        border-bottom: 1px solid black;
+        outline: none;
+
+        padding: 10px;
+
+        font-size: 16px;
+    }
+
+    button {
+        background-color: black;
+        border: 1px solid transparent;
+        border-radius: 5px;
+
+        margin: auto;
+        padding: 15px;
+        width: 50%;
+
+        color: white;
+        font-size: 18px;
+
+        cursor: pointer;
+        transition: all 300ms ease;
+
+        &:hover {
+            background-color: white;
+            border: 1px solid black;
+
+            color: black;
+        }
+    }
+}

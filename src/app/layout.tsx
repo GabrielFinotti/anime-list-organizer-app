@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.scss";
+import localFont from "next/font/local";
 
 export const metadata: Metadata = {
   title: "Anime List Organizer",
   description: "Organize seus animes de forma prática e eficiente.",
 };
+
+const WorkSans = localFont({
+  src: "./WorkSans.woff2",
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
@@ -13,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body>{children}</body>
+      <body className={WorkSans.className}>{children}</body>
     </html>
   );
 }

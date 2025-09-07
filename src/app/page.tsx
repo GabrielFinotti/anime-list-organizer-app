@@ -1,5 +1,11 @@
+import LoginForm from "@/components/layout/forms/loginForm/LoginForm";
+
 const Page = () => {
-  return <h1>Anime List Organizer</h1>;
+  return (
+    <main>
+      <LoginForm />
+    </main>
+  );
 };
 
 export default Page;
