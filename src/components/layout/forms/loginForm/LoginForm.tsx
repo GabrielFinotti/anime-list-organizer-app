@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import style from "./LoginForm.module.scss";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   username: string;
@@ -13,11 +14,13 @@ const LoginForm = () => {
     username: "",
     password: "",
   });
+  const route = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    setFormData({ username: "", password: "" });
+    // Simulação de autenticação bem-sucedida
+    route.push("/anime/list");
   };
 
   return (

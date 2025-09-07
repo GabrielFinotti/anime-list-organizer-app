@@ -1,0 +1,76 @@
+.mobileHeader {
+    background-color: black;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 10px;
+
+    color: white;
+
+    h1 {
+        font-size: 26px;
+        font-weight: 400;
+    }
+
+    button {
+        background: transparent;
+
+        img {
+            filter: invert(1);
+        }
+    }
+
+    aside {
+        background-color: black;
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        position: fixed;
+        top: 0;
+        right: 0;
+
+        padding: 20px 0 10px 0;
+        width: 0;
+        height: 100vh;
+
+        transition: all 500ms ease;
+
+        &.show {
+            width: 50%;
+        }
+
+        button {
+            padding-right: 10px;
+
+            text-align: right;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            a {
+                border-bottom: 1px solid white;
+
+                padding: 10px;
+
+                color: white;
+                font-size: 18px;
+                text-decoration-line: none;
+
+                &.active {
+                    border: transparent;
+
+                    background-color: white;
+
+                    color: black;
+                }
+            }
+        }
+    }
+}
