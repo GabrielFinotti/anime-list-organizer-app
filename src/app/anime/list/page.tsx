@@ -1,8 +1,12 @@
+import SearchForm from "@/components/layout/forms/searchForm/SearchForm";
+
 const AnimeListPage = () => {
   return (
-    <div>
-      <h1>Lista de Animes</h1>
-    </div>
+    <>
+      <section>
+        <SearchForm />
+      </section>
+    </>
   );
 };
 

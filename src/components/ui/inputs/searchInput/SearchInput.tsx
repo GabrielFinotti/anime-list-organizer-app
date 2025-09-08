@@ -1,0 +1,30 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import style from "./SearchInput.module.scss";
+
+const SearchInput = () => {
+  const [isFocused, setIsFocused] = useState(false);
+
+  return (
+    <div className={`${style.searchInput} ${isFocused ? style.focused : ""}`}>
+      <input
+        type="search"
+        placeholder="Buscar anime..."
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      />
+      <span>
+        <Image
+          src="/icons/search_icon.svg"
+          alt="Search"
+          width={25}
+          height={25}
+        />
+      </span>
+    </div>
+  );
+};
+
+export default SearchInput;
