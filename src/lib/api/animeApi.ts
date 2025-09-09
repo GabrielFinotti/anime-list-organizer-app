@@ -15,6 +15,8 @@ class AnimeAPI {
     const instance = new AnimeAPI();
 
     try {
+      if (!name) name = "";
+
       const response = await fetch(`${instance._apiUrl}/animes?name=${name}`, {
         method: "GET",
         headers: {

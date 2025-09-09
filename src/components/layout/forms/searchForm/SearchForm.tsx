@@ -1,17 +1,29 @@
 "use client";
 
-import SearchInput from "@/components/ui/inputs/searchInput/SearchInput";
-import style from "./SearchForm.module.scss";
 import { useEffect, useState } from "react";
+import style from "./SearchForm.module.scss";
+import SearchInput from "@/components/ui/inputs/searchInput/SearchInput";
 import AnimeAPI from "@/lib/api/animeApi";
 import { CategoryDTO } from "@/lib/dto/category.dto";
 import { GenreDTO } from "@/lib/dto/genre.dto";
 import SelectInput from "@/components/ui/inputs/select/SelectInput";
 
-const SearchForm = () => {
+type SearchFormProps = {
+  onSearchChange: (term: string) => void;
+  onCategoryChange: (category: string) => void;
+  onGenreChange: (genre: string) => void;
+};
+
+const SearchForm = ({
+  onSearchChange,
+  onCategoryChange,
+  onGenreChange,
+}: SearchFormProps) => {
   const [categoryName, setCategoryName] = useState<CategoryDTO[]>([]);
   const [genreName, setGenreName] = useState<GenreDTO[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,37 +41,47 @@ const SearchForm = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
 
-    try {
-      const animes = await AnimeAPI.getAnime(searchTerm);
+    setSearchTerm(value);
+    onSearchChange(value);
+  };
 
-      console.log(animes);
-    } catch (error) {
-      console.error("Erro ao buscar animes:", error);
-    }
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+
+    setSelectedCategory(value);
+    onCategoryChange(value);
+  };
+
+  const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+
+    setSelectedGenre(value);
+    onGenreChange(value);
   };
 
   return (
-    <form className={style.searchForm} onSubmit={handleSubmit}>
-      <SearchInput
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+    <div className={style.searchForm}>
+      <SearchInput value={searchTerm} onChange={handleSearchChange} />
       <div className={style.selects}>
         <SelectInput
           name="category"
           label="Categoria"
           options={categoryName.map((cat) => ({ id: cat.id, value: cat.name }))}
+          onChange={handleCategoryChange}
+          value={selectedCategory}
         />
         <SelectInput
           name="genre"
           label="Gênero"
           options={genreName.map((gen) => ({ id: gen.id, value: gen.name }))}
+          onChange={handleGenreChange}
+          value={selectedGenre}
         />
       </div>
-    </form>
+    </div>
   );
 };
 
