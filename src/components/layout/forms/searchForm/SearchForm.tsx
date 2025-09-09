@@ -12,18 +12,21 @@ type SearchFormProps = {
   onSearchChange: (term: string) => void;
   onCategoryChange: (category: string) => void;
   onGenreChange: (genre: string) => void;
+  onIsMovieChange: (type: string) => void;
 };
 
 const SearchForm = ({
   onSearchChange,
   onCategoryChange,
   onGenreChange,
+  onIsMovieChange,
 }: SearchFormProps) => {
   const [categoryName, setCategoryName] = useState<CategoryDTO[]>([]);
   const [genreName, setGenreName] = useState<GenreDTO[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
+  const [isMovieSelected, setIsMovieSelected] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,6 +65,13 @@ const SearchForm = ({
     onGenreChange(value);
   };
 
+  const handleIsMovieChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+
+    setIsMovieSelected(value);
+    onIsMovieChange(value);
+  };
+
   return (
     <div className={style.searchForm}>
       <SearchInput value={searchTerm} onChange={handleSearchChange} />
@@ -79,6 +89,16 @@ const SearchForm = ({
           options={genreName.map((gen) => ({ id: gen.id, value: gen.name }))}
           onChange={handleGenreChange}
           value={selectedGenre}
+        />
+        <SelectInput
+          name="type"
+          label="Tipo"
+          options={[
+            { id: "0", value: "Filme" },
+            { id: "1", value: "Série" },
+          ]}
+          onChange={handleIsMovieChange}
+          value={isMovieSelected}
         />
       </div>
     </div>

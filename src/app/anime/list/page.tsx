@@ -8,6 +8,7 @@ const AnimeListPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
+  const [isMovieSelected, setIsMovieSelected] = useState("");
 
   return (
     <>
@@ -16,6 +17,7 @@ const AnimeListPage = () => {
           onSearchChange={setSearchTerm}
           onCategoryChange={setSelectedCategory}
           onGenreChange={setSelectedGenre}
+          onIsMovieChange={setIsMovieSelected}
         />
       </section>
       <section>
@@ -23,6 +25,7 @@ const AnimeListPage = () => {
           searchTerm={searchTerm}
           selectedCategory={selectedCategory}
           selectedGenre={selectedGenre}
+          isMovieSelected={isMovieSelected}
         />
       </section>
     </>

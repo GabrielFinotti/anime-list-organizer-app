@@ -10,12 +10,14 @@ type AnimeCardProps = {
   searchTerm: string;
   selectedCategory: string;
   selectedGenre: string;
+  isMovieSelected: string;
 };
 
 const AnimeCard = ({
   searchTerm,
   selectedCategory,
   selectedGenre,
+  isMovieSelected,
 }: AnimeCardProps) => {
   const [animes, setAnimes] = useState<AnimeDTO[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,9 +53,14 @@ const AnimeCard = ({
         !selectedGenre ||
         anime.genres.some((genre) => genre.name === selectedGenre);
 
-      return matchesSearch && matchesCategory && matchesGenre;
+      const matchesType =
+        !isMovieSelected ||
+        (isMovieSelected === "Filme" && anime.isMovie) ||
+        (isMovieSelected === "Série" && !anime.isMovie);
+
+      return matchesSearch && matchesCategory && matchesGenre && matchesType;
     });
-  }, [animes, searchTerm, selectedCategory, selectedGenre]);
+  }, [animes, searchTerm, selectedCategory, selectedGenre, isMovieSelected]);
 
   return (
     <div className={style.container}>
