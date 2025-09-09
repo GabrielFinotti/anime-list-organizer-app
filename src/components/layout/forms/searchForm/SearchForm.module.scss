@@ -4,8 +4,8 @@
     padding: 20px;
 
     .selects {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
 
         margin-top: 30px;

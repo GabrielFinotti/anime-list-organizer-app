@@ -9,6 +9,8 @@ const AnimeListPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
   const [isMovieSelected, setIsMovieSelected] = useState("");
+  const [selectedActualStatus, setSelectedActualStatus] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
 
   return (
     <>
@@ -18,6 +20,8 @@ const AnimeListPage = () => {
           onCategoryChange={setSelectedCategory}
           onGenreChange={setSelectedGenre}
           onIsMovieChange={setIsMovieSelected}
+          onActualStatusChange={setSelectedActualStatus}
+          onStatusChange={setSelectedStatus}
         />
       </section>
       <section>
@@ -26,6 +30,8 @@ const AnimeListPage = () => {
           selectedCategory={selectedCategory}
           selectedGenre={selectedGenre}
           isMovieSelected={isMovieSelected}
+          selectedActualStatus={selectedActualStatus}
+          selectedStatus={selectedStatus}
         />
       </section>
     </>

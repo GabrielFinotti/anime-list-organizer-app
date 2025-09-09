@@ -11,6 +11,8 @@ type AnimeCardProps = {
   selectedCategory: string;
   selectedGenre: string;
   isMovieSelected: string;
+  selectedActualStatus: string;
+  selectedStatus: string;
 };
 
 const AnimeCard = ({
@@ -18,6 +20,8 @@ const AnimeCard = ({
   selectedCategory,
   selectedGenre,
   isMovieSelected,
+  selectedActualStatus,
+  selectedStatus,
 }: AnimeCardProps) => {
   const [animes, setAnimes] = useState<AnimeDTO[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -58,9 +62,29 @@ const AnimeCard = ({
         (isMovieSelected === "Filme" && anime.isMovie) ||
         (isMovieSelected === "Série" && !anime.isMovie);
 
-      return matchesSearch && matchesCategory && matchesGenre && matchesType;
+      const matchesActualStatus =
+        !selectedActualStatus || anime.actualStatus === selectedActualStatus;
+
+      const matchesStatus = !selectedStatus || anime.status === selectedStatus;
+
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesGenre &&
+        matchesType &&
+        matchesActualStatus &&
+        matchesStatus
+      );
     });
-  }, [animes, searchTerm, selectedCategory, selectedGenre, isMovieSelected]);
+  }, [
+    animes,
+    searchTerm,
+    selectedCategory,
+    selectedGenre,
+    isMovieSelected,
+    selectedActualStatus,
+    selectedStatus,
+  ]);
 
   return (
     <div className={style.container}>

@@ -13,13 +13,31 @@ type SearchFormProps = {
   onCategoryChange: (category: string) => void;
   onGenreChange: (genre: string) => void;
   onIsMovieChange: (type: string) => void;
+  onActualStatusChange: (status: string) => void;
+  onStatusChange: (status: string) => void;
 };
+
+const actualStatusOptions = [
+  { id: "1", value: "publishing", span: "Publicando" },
+  { id: "2", value: "completed", span: "Concluído" },
+  { id: "3", value: "cancelled", span: "Cancelado" },
+  { id: "4", value: "in production", span: "Em produção" },
+];
+
+const statusOptions = [
+  { id: "1", value: "watching", span: "Assistindo" },
+  { id: "2", value: "watched", span: "Assistido" },
+  { id: "3", value: "in list", span: "Na lista" },
+  { id: "4", value: "dropped", span: "Abandonado" },
+];
 
 const SearchForm = ({
   onSearchChange,
   onCategoryChange,
   onGenreChange,
   onIsMovieChange,
+  onActualStatusChange,
+  onStatusChange,
 }: SearchFormProps) => {
   const [categoryName, setCategoryName] = useState<CategoryDTO[]>([]);
   const [genreName, setGenreName] = useState<GenreDTO[]>([]);
@@ -27,6 +45,8 @@ const SearchForm = ({
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
   const [isMovieSelected, setIsMovieSelected] = useState("");
+  const [selectedActualStatus, setSelectedActualStatus] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,6 +92,22 @@ const SearchForm = ({
     onIsMovieChange(value);
   };
 
+  const handleActualStatusChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const value = e.target.value;
+
+    setSelectedActualStatus(value);
+    onActualStatusChange(value);
+  };
+
+  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+
+    setSelectedStatus(value);
+    onStatusChange(value);
+  };
+
   return (
     <div className={style.searchForm}>
       <SearchInput value={searchTerm} onChange={handleSearchChange} />
@@ -99,6 +135,20 @@ const SearchForm = ({
           ]}
           onChange={handleIsMovieChange}
           value={isMovieSelected}
+        />
+        <SelectInput
+          name="actualStatus"
+          label="Estado Atual"
+          options={actualStatusOptions}
+          onChange={handleActualStatusChange}
+          value={selectedActualStatus}
+        />
+        <SelectInput
+          name="status"
+          label="Status"
+          options={statusOptions}
+          onChange={handleStatusChange}
+          value={selectedStatus}
         />
       </div>
     </div>
