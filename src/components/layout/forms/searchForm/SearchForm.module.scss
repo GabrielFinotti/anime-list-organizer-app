@@ -2,4 +2,11 @@
     background-color: black;
 
     padding: 20px;
+
+    .selects {
+        display: flex;
+        justify-content: space-between;
+
+        margin-top: 30px;
+    }
 }

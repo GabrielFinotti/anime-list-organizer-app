@@ -4,16 +4,20 @@ import { useState } from "react";
 import Image from "next/image";
 import style from "./SearchInput.module.scss";
 
-const SearchInput = () => {
+type SearchInputProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+const SearchInput = (props: SearchInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
     <div className={`${style.searchInput} ${isFocused ? style.focused : ""}`}>
       <input
+        id="search"
         type="search"
         placeholder="Buscar anime..."
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        {...props}
       />
       <span>
         <Image

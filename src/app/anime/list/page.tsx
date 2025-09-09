@@ -6,6 +6,9 @@ const AnimeListPage = () => {
       <section>
         <SearchForm />
       </section>
+      <section>
+        <div>Anime List</div>
+      </section>
     </>
   );
 };
