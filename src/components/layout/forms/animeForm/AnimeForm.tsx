@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import style from "./AnimeForm.module.scss";
 import SelectInput from "@/components/ui/inputs/select/SelectInput";
 import { AnimeDTO } from "@/lib/dto/anime.dto";
@@ -62,8 +62,6 @@ const AnimeForm = ({
     status: "in list",
   };
 
-  const appliedRef = useRef(false);
-
   const [formData, setFormData] = useState<AnimeFormData>(defaultState);
 
   const mergeInitial = (
@@ -111,9 +109,8 @@ const AnimeForm = ({
   };
 
   useEffect(() => {
-    if (initialData && !appliedRef.current) {
+    if (initialData) {
       setFormData((prev) => mergeInitial(prev, initialData));
-      appliedRef.current = true;
     }
   }, [initialData]);
 
