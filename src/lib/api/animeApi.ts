@@ -1,3 +1,4 @@
+import { AnimeFormData } from "@/components/layout/forms/animeForm/AnimeForm";
 import { AnimeDTO } from "../dto/anime.dto";
 import { CategoryDTO } from "../dto/category.dto";
 import { GenreDTO } from "../dto/genre.dto";
@@ -80,6 +81,26 @@ class AnimeAPI {
       });
 
       return (await response.json()) as GenreDTO[];
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async createAnime(anime: AnimeFormData) {
+    const instance = new AnimeAPI();
+
+    try {
+      const response = await fetch(`${instance._apiUrl}/animes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Basic " + btoa(`${instance._username}:${instance._password}`),
+        },
+        body: JSON.stringify(anime),
+      });
+
+      return (await response.json()) as AnimeDTO;
     } catch (error) {
       throw error;
     }

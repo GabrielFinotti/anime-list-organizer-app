@@ -9,7 +9,7 @@ import AnimeAPI from "@/lib/api/animeApi";
 import Checkbox from "@/components/ui/inputs/checkbox/Checkbox";
 import DerivatesBox from "./derivates/DerivatesBox";
 
-type AnimeFormData = Omit<
+export type AnimeFormData = Omit<
   AnimeDTO,
   "id" | "category" | "genres" | "adultGenres"
 > & {
@@ -141,9 +141,44 @@ const AnimeForm = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+
+    const isFormValid = (data: AnimeFormData) => {
+      const stringFields = [
+        data.name,
+        data.synopsis,
+        data.typeOfMaterialOrigin,
+        data.materialOriginName,
+        data.releaseDate,
+      ];
+
+      for (const s of stringFields) {
+        if (typeof s === "string" && s.trim() === "") return false;
+      }
+
+      if (
+        !data.category ||
+        !data.category.name ||
+        data.category.name.trim() === ""
+      )
+        return false;
+
+      if (!data.genres || data.genres.length === 0) return false;
+
+      return true;
+    };
+
+    if (!isFormValid(formData)) {
+      return;
+    }
+
+    try {
+      const createdAnime = await AnimeAPI.createAnime(formData);
+      console.log("Anime created successfully:", createdAnime);
+    } catch (error) {
+      console.error("Error creating anime:", error);
+    }
   };
 
   const handleMultiSelectChange = (
