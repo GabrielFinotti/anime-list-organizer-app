@@ -108,19 +108,16 @@ const AnimeForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value, type, checked } = e.target;
-    const newValue = type === "checkbox" ? checked : value;
+    let newValue: string | number | boolean =
+      type === "checkbox" ? checked : value;
+
+    if (type === "number") {
+      newValue = value === "" ? 0 : Number(value);
+    }
 
     setFormData((prevData) => ({
       ...prevData,
       [id]: newValue,
-    }));
-  };
-
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    setFormData((prevData) => ({
-      ...prevData,
-      category: { name: value },
     }));
   };
 
@@ -129,10 +126,19 @@ const AnimeForm = () => {
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const value = e.target.value;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => {
+      if (name === "category") {
+        return {
+          ...prevData,
+          category: { name: value },
+        };
+      }
+
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -184,7 +190,7 @@ const AnimeForm = () => {
             label="Categoria"
             options={categoryOptions}
             value={formData.category.name}
-            onChange={handleCategoryChange}
+            onChange={(e) => handleSelectChange("category", e)}
           />
         </div>
         <div className={style.selectBox}>
@@ -230,7 +236,6 @@ const AnimeForm = () => {
           label="Última Temporada Lançada"
           id="lastReleaseSeason"
           type="number"
-          min={0}
           value={formData.lastReleaseSeason}
           onChange={handleChange}
         />
@@ -238,7 +243,6 @@ const AnimeForm = () => {
           label="Última Temporada Assistida"
           id="lastWatchedSeason"
           type="number"
-          min={0}
           value={formData.lastWatchedSeason}
           onChange={handleChange}
         />
@@ -246,7 +250,6 @@ const AnimeForm = () => {
           label="Último Episódio Assistido"
           id="lastWatchedEpisode"
           type="number"
-          min={0}
           value={formData.lastWatchedEpisode}
           onChange={handleChange}
         />
@@ -285,7 +288,9 @@ const AnimeForm = () => {
           />
         </div>
       </div>
-      <button type="submit" className={style.submitButton}>Adicionar</button>
+      <button type="submit" className={style.submitButton}>
+        Adicionar
+      </button>
     </form>
   );
 };
