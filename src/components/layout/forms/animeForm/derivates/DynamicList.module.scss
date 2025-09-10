@@ -1,0 +1,65 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.inputRow {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.addButton {
+    background-color: rgb(7, 7, 7);
+    border: 1px solid rgba(255, 255, 255, 0.575);
+    border-radius: 8px;
+
+    margin: auto;
+    padding: 10px;
+    width: 60%;
+
+    color: white;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px;
+
+    span {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    button {
+        background-color: #ff4444;
+        border: none;
+        border-radius: 4px;
+
+        margin: 0;
+        padding: 8px;
+
+        color: white;
+        font-size: 14px;
+
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+}

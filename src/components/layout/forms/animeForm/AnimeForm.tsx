@@ -6,6 +6,8 @@ import SelectInput from "@/components/ui/inputs/select/SelectInput";
 import { AnimeDTO } from "@/lib/dto/anime.dto";
 import DefaultInput from "@/components/ui/inputs/defaultInput/DefaultInput";
 import AnimeAPI from "@/lib/api/animeApi";
+import Checkbox from "@/components/ui/inputs/checkbox/Checkbox";
+import DerivatesBox from "./derivates/DerivatesBox";
 
 type AnimeFormData = Omit<
   AnimeDTO,
@@ -152,86 +154,8 @@ const AnimeForm = () => {
     }));
   };
 
-  const handleAddMovie = () => {
-    const input = document.getElementById("movies") as HTMLInputElement;
-    const value = input?.value.trim();
-    if (value) {
-      setFormData((prevData) => ({
-        ...prevData,
-        derivate: {
-          movies: [...(prevData.derivate?.movies || []), value],
-          ovas: prevData.derivate?.ovas || [],
-          specials: prevData.derivate?.specials || [],
-        },
-      }));
-      input.value = "";
-    }
-  };
-
-  const handleAddOva = () => {
-    const input = document.getElementById("ovas") as HTMLInputElement;
-    const value = input?.value.trim();
-    if (value) {
-      setFormData((prevData) => ({
-        ...prevData,
-        derivate: {
-          movies: prevData.derivate?.movies || [],
-          ovas: [...(prevData.derivate?.ovas || []), value],
-          specials: prevData.derivate?.specials || [],
-        },
-      }));
-      input.value = "";
-    }
-  };
-
-  const handleAddSpecial = () => {
-    const input = document.getElementById("specials") as HTMLInputElement;
-    const value = input?.value.trim();
-    if (value) {
-      setFormData((prevData) => ({
-        ...prevData,
-        derivate: {
-          movies: prevData.derivate?.movies || [],
-          ovas: prevData.derivate?.ovas || [],
-          specials: [...(prevData.derivate?.specials || []), value],
-        },
-      }));
-      input.value = "";
-    }
-  };
-
-  const handleRemoveMovie = (index: number) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      derivate: {
-        movies: prevData.derivate?.movies?.filter((_, i) => i !== index) || [],
-        ovas: prevData.derivate?.ovas || [],
-        specials: prevData.derivate?.specials || [],
-      },
-    }));
-  };
-
-  const handleRemoveOva = (index: number) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      derivate: {
-        movies: prevData.derivate?.movies || [],
-        ovas: prevData.derivate?.ovas?.filter((_, i) => i !== index) || [],
-        specials: prevData.derivate?.specials || [],
-      },
-    }));
-  };
-
-  const handleRemoveSpecial = (index: number) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      derivate: {
-        movies: prevData.derivate?.movies || [],
-        ovas: prevData.derivate?.ovas || [],
-        specials:
-          prevData.derivate?.specials?.filter((_, i) => i !== index) || [],
-      },
-    }));
+  const handleDerivatesChange = (derivate: typeof formData.derivate) => {
+    setFormData((prev) => ({ ...prev, derivate }));
   };
 
   return (
@@ -327,111 +251,23 @@ const AnimeForm = () => {
           onChange={handleChange}
         />
         <div className={style.checkboxBox}>
-          <label className={style.checkboxLabel}>
-            <input
-              type="checkbox"
-              id="isMovie"
-              checked={formData.isMovie}
-              onChange={handleChange}
-            />
-            É um Filme?
-          </label>
-          <label className={style.checkboxLabel}>
-            <input
-              type="checkbox"
-              id="isAdult"
-              checked={formData.isAdult}
-              onChange={handleChange}
-            />
-            É Adulto?
-          </label>
+          <Checkbox
+            id="isMovie"
+            label="É um Filme?"
+            checked={formData.isMovie}
+            onChange={handleChange}
+          />
+          <Checkbox
+            id="isAdult"
+            label="É Adulto?"
+            checked={formData.isAdult}
+            onChange={handleChange}
+          />
         </div>
-        <div className={style.derivateBox}>
-          <h2>Derivados</h2>
-          <div className={style.derivateInputs}>
-            <div className={style.inputWithButton}>
-              <DefaultInput
-                label="Filmes"
-                id="movies"
-                type="text"
-                placeholder="Nome do filme..."
-              />
-              <button
-                type="button"
-                className={style.addButton}
-                onClick={handleAddMovie}
-              >
-                Adicionar
-              </button>
-            </div>
-            <div className={style.derivateList}>
-              {formData.derivate?.movies?.map((movie, index) => (
-                <div key={index} className={style.derivateItem}>
-                  <span>{movie}</span>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveMovie(index)}
-                  >
-                    Remover
-                  </button>
-                </div>
-              ))}
-            </div>
-            <div className={style.inputWithButton}>
-              <DefaultInput
-                label="OVAs"
-                id="ovas"
-                type="text"
-                placeholder="Nome do OVA..."
-              />
-              <button
-                type="button"
-                className={style.addButton}
-                onClick={handleAddOva}
-              >
-                Adicionar
-              </button>
-            </div>
-            <div className={style.derivateList}>
-              {formData.derivate?.ovas?.map((ova, index) => (
-                <div key={index} className={style.derivateItem}>
-                  <span>{ova}</span>
-                  <button type="button" onClick={() => handleRemoveOva(index)}>
-                    Remover
-                  </button>
-                </div>
-              ))}
-            </div>
-            <div className={style.inputWithButton}>
-              <DefaultInput
-                label="Especiais"
-                id="specials"
-                type="text"
-                placeholder="Nome do especial..."
-              />
-              <button
-                type="button"
-                className={style.addButton}
-                onClick={handleAddSpecial}
-              >
-                Adicionar
-              </button>
-            </div>
-            <div className={style.derivateList}>
-              {formData.derivate?.specials?.map((special, index) => (
-                <div key={index} className={style.derivateItem}>
-                  <span>{special}</span>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveSpecial(index)}
-                  >
-                    Remover
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <DerivatesBox
+          value={formData.derivate || { movies: [], ovas: [], specials: [] }}
+          onChange={handleDerivatesChange}
+        />
         <div className={style.selectBox}>
           <SelectInput
             name="actualStatus"
@@ -449,7 +285,7 @@ const AnimeForm = () => {
           />
         </div>
       </div>
-      <button type="submit">Adicionar</button>
+      <button type="submit" className={style.submitButton}>Adicionar</button>
     </form>
   );
 };
