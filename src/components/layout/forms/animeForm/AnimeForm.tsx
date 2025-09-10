@@ -36,8 +36,12 @@ const statusOptions = [
 
 const AnimeForm = ({
   initialData,
+  animeId,
+  onUpdated,
 }: {
   initialData?: Partial<AnimeFormData>;
+  animeId?: string;
+  onUpdated?: (anime: AnimeDTO) => void;
 }) => {
   const defaultState: AnimeFormData = {
     name: "",
@@ -63,6 +67,7 @@ const AnimeForm = ({
   };
 
   const [formData, setFormData] = useState<AnimeFormData>(defaultState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const mergeInitial = (
     base: AnimeFormData,
@@ -229,11 +234,21 @@ const AnimeForm = ({
       return;
     }
 
+    setIsSubmitting(true);
     try {
-      const createdAnime = await AnimeAPI.createAnime(formData);
-      console.log("Anime created successfully:", createdAnime);
+      if (animeId) {
+        const updated = await AnimeAPI.updateAnime(animeId, formData);
+        onUpdated?.(updated);
+        console.log("Anime updated successfully:", updated);
+      } else {
+        const createdAnime = await AnimeAPI.createAnime(formData);
+        onUpdated?.(createdAnime);
+        console.log("Anime created successfully:", createdAnime);
+      }
     } catch (error) {
-      console.error("Error creating anime:", error);
+      console.error("Error submitting anime:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -257,7 +272,7 @@ const AnimeForm = ({
 
   return (
     <form className={style.form} onSubmit={handleSubmit}>
-      <h1>Adicionar Anime</h1>
+      <h1>{animeId ? "Editar Anime" : "Adicionar Anime"}</h1>
       <div className={style.inputs}>
         <DefaultInput
           label="Nome"
@@ -379,8 +394,18 @@ const AnimeForm = ({
           />
         </div>
       </div>
-      <button type="submit" className={style.submitButton}>
-        Adicionar
+      <button
+        type="submit"
+        className={style.submitButton}
+        disabled={isSubmitting}
+      >
+        {isSubmitting
+          ? animeId
+            ? "Atualizando..."
+            : "Adicionando..."
+          : animeId
+          ? "Atualizar"
+          : "Adicionar"}
       </button>
     </form>
   );

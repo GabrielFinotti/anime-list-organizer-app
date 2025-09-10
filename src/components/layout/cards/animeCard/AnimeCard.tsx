@@ -5,6 +5,7 @@ import style from "./AnimeCard.module.scss";
 import { AnimeDTO } from "@/lib/dto/anime.dto";
 import AnimeAPI from "@/lib/api/animeApi";
 import Loader from "@/components/ui/loaders/Loader";
+import { useRouter } from "next/navigation";
 
 type AnimeCardProps = {
   searchTerm: string;
@@ -25,6 +26,7 @@ const AnimeCard = ({
 }: AnimeCardProps) => {
   const [animes, setAnimes] = useState<AnimeDTO[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchAnimes = async () => {
@@ -86,13 +88,34 @@ const AnimeCard = ({
     selectedStatus,
   ]);
 
+  const handleNavigate = (id: string) => {
+    router.push(`/anime/data/${id}`);
+  };
+
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+    id: string
+  ) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleNavigate(id);
+    }
+  };
+
   return (
     <div className={style.container}>
       {isLoading ? (
         <Loader message="Carregando animes..." />
       ) : (
         filteredAnimes.map((anime) => (
-          <div key={anime.id} className={style.animeCard}>
+          <div
+            key={anime.id}
+            className={style.animeCard}
+            role="button"
+            tabIndex={0}
+            onClick={() => handleNavigate(anime.id)}
+            onKeyDown={(e) => handleKeyDown(e, anime.id)}
+          >
             <h3 className={style.title}>{anime.name}</h3>
             <div className={style.info}>
               <p className={style.category}>Categoria: {anime.category.name}</p>

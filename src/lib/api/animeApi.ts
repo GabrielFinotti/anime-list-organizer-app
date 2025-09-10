@@ -53,6 +53,24 @@ class AnimeAPI {
     }
   }
 
+  static async getAnimeById(id: string) {
+    const instance = new AnimeAPI();
+
+    try {
+      const response = await fetch(`${instance._apiUrl}/animes/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization:
+            "Basic " + btoa(`${instance._username}:${instance._password}`),
+        },
+      });
+
+      return (await response.json()) as AnimeDTO;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async getCategories() {
     const instance = new AnimeAPI();
 
@@ -122,6 +140,47 @@ class AnimeAPI {
       });
 
       return (await response.json()) as AnimeDTO;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async updateAnime(id: string, anime: AnimeFormData) {
+    const instance = new AnimeAPI();
+
+    try {
+      const response = await fetch(`${instance._apiUrl}/anime/update/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Basic " + btoa(`${instance._username}:${instance._password}`),
+        },
+        body: JSON.stringify({
+          id,
+          ...anime,
+        }),
+      });
+
+      return (await response.json()) as AnimeDTO;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async deleteAnime(id: string) {
+    const instance = new AnimeAPI();
+
+    try {
+      const response = await fetch(`${instance._apiUrl}/anime/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization:
+            "Basic " + btoa(`${instance._username}:${instance._password}`),
+        },
+      });
+
+      return response.ok;
     } catch (error) {
       throw error;
     }
