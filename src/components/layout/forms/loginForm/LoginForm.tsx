@@ -19,8 +19,17 @@ const LoginForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Simulação de autenticação bem-sucedida
-    route.push("/anime/list");
+    if (
+      formData.username === process.env.NEXT_PUBLIC_BASIC_USERNAME &&
+      formData.password === process.env.NEXT_PUBLIC_BASIC_PASSWORD
+    ) {
+      sessionStorage.setItem("loggedIn", "true");
+      document.cookie = "loggedIn=true; path=/";
+
+      route.push("/anime/list");
+    }
+
+    setFormData({ username: "", password: "" });
   };
 
   return (
