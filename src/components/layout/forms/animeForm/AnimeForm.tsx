@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import style from "./AnimeForm.module.scss";
 import SelectInput from "@/components/ui/inputs/select/SelectInput";
 import { AnimeDTO } from "@/lib/dto/anime.dto";
@@ -34,8 +34,12 @@ const statusOptions = [
   { id: "dropped", value: "dropped", span: "Dropado" },
 ];
 
-const AnimeForm = () => {
-  const [formData, setFormData] = useState<AnimeFormData>({
+const AnimeForm = ({
+  initialData,
+}: {
+  initialData?: Partial<AnimeFormData>;
+}) => {
+  const defaultState: AnimeFormData = {
     name: "",
     synopsis: "",
     category: { name: "" },
@@ -56,7 +60,62 @@ const AnimeForm = () => {
     lastWatchedEpisode: 0,
     actualStatus: "publishing",
     status: "in list",
-  });
+  };
+
+  const appliedRef = useRef(false);
+
+  const [formData, setFormData] = useState<AnimeFormData>(defaultState);
+
+  const mergeInitial = (
+    base: AnimeFormData,
+    partial?: Partial<AnimeFormData>
+  ): AnimeFormData => {
+    if (!partial) return base;
+
+    const safe = <K extends keyof AnimeFormData>(key: K): AnimeFormData[K] => {
+      const value = partial[key];
+      return (value === undefined ? base[key] : value) as AnimeFormData[K];
+    };
+
+    return {
+      ...base,
+      name: safe("name"),
+      synopsis: safe("synopsis"),
+      category: partial.category
+        ? { name: partial.category.name || "" }
+        : base.category,
+      genres: partial.genres
+        ? partial.genres.map((g) => ({ name: g.name }))
+        : base.genres,
+      adultGenres: partial.adultGenres
+        ? partial.adultGenres.map((g) => ({ name: g.name }))
+        : base.adultGenres,
+      typeOfMaterialOrigin: safe("typeOfMaterialOrigin"),
+      materialOriginName: safe("materialOriginName"),
+      releaseDate: safe("releaseDate"),
+      isMovie: safe("isMovie"),
+      isAdult: safe("isAdult"),
+      derivate: partial.derivate
+        ? {
+            movies: partial.derivate.movies || [],
+            ovas: partial.derivate.ovas || [],
+            specials: partial.derivate.specials || [],
+          }
+        : base.derivate,
+      lastReleaseSeason: safe("lastReleaseSeason"),
+      lastWatchedSeason: safe("lastWatchedSeason"),
+      lastWatchedEpisode: safe("lastWatchedEpisode"),
+      actualStatus: safe("actualStatus"),
+      status: safe("status"),
+    };
+  };
+
+  useEffect(() => {
+    if (initialData && !appliedRef.current) {
+      setFormData((prev) => mergeInitial(prev, initialData));
+      appliedRef.current = true;
+    }
+  }, [initialData]);
 
   const [categoryOptions, setCategoryOptions] = useState<
     { id: string; value: string; span: string }[]

@@ -12,6 +12,27 @@ class AnimeAPI {
     this.verifyEnv();
   }
 
+  static async getAnimeLookup(title: string) {
+    const instance = new AnimeAPI();
+
+    try {
+      const response = await fetch(
+        `${instance._apiUrl}/anime/lookup?title=${title}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization:
+              "Basic " + btoa(`${instance._username}:${instance._password}`),
+          },
+        }
+      );
+
+      return (await response.json()) as AnimeDTO;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async getAnime(name?: string) {
     const instance = new AnimeAPI();
 

@@ -4,11 +4,16 @@ type DefaultInputProps = {
   label: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const DefaultInput = ({ label, ...props }: DefaultInputProps) => {
+const DefaultInput = ({ label, value, ...props }: DefaultInputProps) => {
+  const safeValue =
+    value === undefined || value === null
+      ? ""
+      : (value as string | number | readonly string[]);
+
   return (
     <div className={style.inputBox}>
       <label htmlFor={props.id}>{label}</label>
-      <input {...props} />
+      <input value={safeValue} {...props} />
     </div>
   );
 };
