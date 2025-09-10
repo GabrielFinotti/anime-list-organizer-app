@@ -33,13 +33,11 @@ class AnimeAPI {
     }
   }
 
-  static async getAnime(name?: string) {
+  static async getAnime() {
     const instance = new AnimeAPI();
 
     try {
-      if (!name) name = "";
-
-      const response = await fetch(`${instance._apiUrl}/animes?name=${name}`, {
+      const response = await fetch(`${instance._apiUrl}/animes`, {
         method: "GET",
         headers: {
           Authorization:
