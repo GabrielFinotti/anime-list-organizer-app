@@ -572,9 +572,6 @@ SOFTWARE.
 
 **Gabriel Henrique Finotti**
 
-- GitHub: [@GabrielFinotti](https://github.com/GabrielFinotti)
-- LinkedIn: [Gabriel Finotti](https://linkedin.com/in/gabriel-finotti)
-
 ### Stats do Projeto
 
 ![GitHub stars](https://img.shields.io/github/stars/GabrielFinotti/anime-list-organizer-app?style=social)
@@ -586,11 +583,11 @@ SOFTWARE.
 <details>
 <summary>📊 Estatísticas de Desenvolvimento</summary>
 
-- **Primeira versão**: 2024
+- **Primeira versão**: 2025
 - **Versão atual**: 2.0.0
 - **Linguagem principal**: TypeScript
 - **Framework**: Next.js
-- **Última atualização**: Janeiro 2025
+- **Última atualização**: Setembro 2025
 
 </details>
 
