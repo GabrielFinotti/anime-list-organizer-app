@@ -67,6 +67,24 @@ class AnimeAPI {
     }
   }
 
+  static async getAdultGenres() {
+    const instance = new AnimeAPI();
+
+    try {
+      const response = await fetch(`${instance._apiUrl}/adult-genres`, {
+        method: "GET",
+        headers: {
+          Authorization:
+            "Basic " + btoa(`${instance._username}:${instance._password}`),
+        },
+      });
+
+      return (await response.json()) as GenreDTO[];
+    } catch (error) {
+      throw error;
+    }
+  }
+
   private verifyEnv() {
     if (!this._username || !this._password || !this._apiUrl) {
       throw new Error("Missing environment variables");

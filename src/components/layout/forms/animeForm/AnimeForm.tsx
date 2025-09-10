@@ -1,0 +1,287 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import style from "./AnimeForm.module.scss";
+import SelectInput from "@/components/ui/inputs/select/SelectInput";
+import { AnimeDTO } from "@/lib/dto/anime.dto";
+import DefaultInput from "@/components/ui/inputs/defaultInput/DefaultInput";
+import AnimeAPI from "@/lib/api/animeApi";
+
+type AnimeFormData = Omit<
+  AnimeDTO,
+  "id" | "category" | "genres" | "adultGenres"
+> & {
+  category: {
+    name: string;
+  };
+  genres: { name: string }[];
+  adultGenres: { name: string }[];
+};
+
+const actualStatusOptions = [
+  { id: "publishing", value: "publishing", span: "Publicando" },
+  { id: "completed", value: "completed", span: "Concluído" },
+  { id: "cancelled", value: "cancelled", span: "Cancelado" },
+  { id: "in production", value: "in production", span: "Em produção" },
+];
+
+const statusOptions = [
+  { id: "watching", value: "watching", span: "Assistindo" },
+  { id: "watched", value: "watched", span: "Assistido" },
+  { id: "in list", value: "in list", span: "Na lista" },
+  { id: "dropped", value: "dropped", span: "Dropado" },
+];
+
+const AnimeForm = () => {
+  const [formData, setFormData] = useState<AnimeFormData>({
+    name: "",
+    synopsis: "",
+    category: { name: "" },
+    genres: [],
+    adultGenres: [],
+    typeOfMaterialOrigin: "",
+    materialOriginName: "",
+    releaseDate: "",
+    isMovie: false,
+    isAdult: false,
+    derivate: {
+      movies: [],
+      ovas: [],
+      specials: [],
+    },
+    lastReleaseSeason: 0,
+    lastWatchedSeason: 0,
+    lastWatchedEpisode: 0,
+    actualStatus: "publishing",
+    status: "in list",
+  });
+
+  const [categoryOptions, setCategoryOptions] = useState<
+    { id: string; value: string; span: string }[]
+  >([]);
+  const [genreOptions, setGenreOptions] = useState<
+    { id: string; value: string; span: string }[]
+  >([]);
+  const [adultGenreOptions, setAdultGenreOptions] = useState<
+    { id: string; value: string; span: string }[]
+  >([]);
+
+  useEffect(() => {
+    const fetchOptions = async () => {
+      try {
+        const categories = await AnimeAPI.getCategories();
+        const genres = await AnimeAPI.getGenres();
+        const adultGenres = await AnimeAPI.getAdultGenres();
+
+        setCategoryOptions(
+          categories.map((cat) => ({
+            id: cat.id,
+            value: cat.name,
+            span: cat.name,
+          }))
+        );
+
+        setGenreOptions(
+          genres.map((gen) => ({
+            id: gen.id,
+            value: gen.name,
+            span: gen.name,
+          }))
+        );
+
+        setAdultGenreOptions(
+          adultGenres.map((gen) => ({
+            id: gen.id,
+            value: gen.name,
+            span: gen.name,
+          }))
+        );
+      } catch (error) {
+        console.error("Erro ao buscar opções da API:", error);
+      }
+    };
+
+    fetchOptions();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value, type, checked } = e.target;
+    const newValue = type === "checkbox" ? checked : value;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: newValue,
+    }));
+  };
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setFormData((prevData) => ({
+      ...prevData,
+      category: { name: value },
+    }));
+  };
+
+  const handleSelectChange = (
+    name: string,
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const value = e.target.value;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
+  const handleMultiSelectChange = (
+    name: string,
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const selectedValues = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: selectedValues.map((value) => ({ name: value })),
+    }));
+  };
+
+  return (
+    <form className={style.form} onSubmit={handleSubmit}>
+      <h1>Adicionar Anime</h1>
+      <div className={style.inputs}>
+        <DefaultInput
+          label="Nome"
+          id="name"
+          type="text"
+          value={formData.name}
+          autoFocus
+          autoComplete="name"
+          onChange={handleChange}
+        />
+        <DefaultInput
+          label="Sinopse"
+          id="synopsis"
+          type="text"
+          value={formData.synopsis}
+          onChange={handleChange}
+        />
+        <SelectInput
+          name="category"
+          label="Categoria"
+          options={categoryOptions}
+          value={formData.category.name}
+          onChange={handleCategoryChange}
+        />
+        <div className={style.selectBox}>
+          <SelectInput
+            name="genres"
+            label="Gêneros"
+            options={genreOptions}
+            value={formData.genres.map((g) => g.name)}
+            multiple
+            onChange={(e) => handleMultiSelectChange("genres", e)}
+          />
+          <SelectInput
+            name="adultGenres"
+            label="Gêneros Adultos"
+            options={adultGenreOptions}
+            value={formData.adultGenres.map((g) => g.name)}
+            multiple
+            onChange={(e) => handleMultiSelectChange("adultGenres", e)}
+          />
+        </div>
+        <DefaultInput
+          label="Tipo de Material de Origem"
+          id="typeOfMaterialOrigin"
+          type="text"
+          value={formData.typeOfMaterialOrigin}
+          onChange={handleChange}
+        />
+        <DefaultInput
+          label="Nome do Material de Origem"
+          id="materialOriginName"
+          type="text"
+          value={formData.materialOriginName}
+          onChange={handleChange}
+        />
+        <DefaultInput
+          label="Data de Lançamento"
+          id="releaseDate"
+          type="date"
+          value={formData.releaseDate}
+          onChange={handleChange}
+        />
+        <DefaultInput
+          label="Última Temporada Lançada"
+          id="lastReleaseSeason"
+          type="number"
+          min={0}
+          value={formData.lastReleaseSeason}
+          onChange={handleChange}
+        />
+        <DefaultInput
+          label="Última Temporada Assistida"
+          id="lastWatchedSeason"
+          type="number"
+          min={0}
+          value={formData.lastWatchedSeason}
+          onChange={handleChange}
+        />
+        <DefaultInput
+          label="Último Episódio Assistido"
+          id="lastWatchedEpisode"
+          type="number"
+          min={0}
+          value={formData.lastWatchedEpisode}
+          onChange={handleChange}
+        />
+        <div className={style.checkboxBox}>
+          <label className={style.checkboxLabel}>
+            <input
+              type="checkbox"
+              id="isMovie"
+              checked={formData.isMovie}
+              onChange={handleChange}
+            />
+            É um Filme?
+          </label>
+          <label className={style.checkboxLabel}>
+            <input
+              type="checkbox"
+              id="isAdult"
+              checked={formData.isAdult}
+              onChange={handleChange}
+            />
+            É Adulto?
+          </label>
+        </div>
+        <div className={style.selectBox}>
+          <SelectInput
+            name="actualStatus"
+            label="Estado Atual"
+            options={actualStatusOptions}
+            value={formData.actualStatus}
+            onChange={(e) => handleSelectChange("actualStatus", e)}
+          />
+          <SelectInput
+            name="status"
+            label="Status"
+            options={statusOptions}
+            value={formData.status}
+            onChange={(e) => handleSelectChange("status", e)}
+          />
+        </div>
+      </div>
+      <button type="submit">Adicionar</button>
+    </form>
+  );
+};
+
+export default AnimeForm;

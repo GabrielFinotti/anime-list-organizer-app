@@ -9,10 +9,7 @@ type SelectInputProps = {
 const SelectInput = ({ name, options, label, ...props }: SelectInputProps) => {
   return (
     <select id={name} className={style.select} {...props}>
-      <option value="" disabled hidden>
-        {label}
-      </option>
-      <option value="">Todos</option>
+      <option value="">{label}</option>
       {options.map((option) => (
         <option key={option.id} value={option.value}>
           {option.span ? option.span : option.value}
