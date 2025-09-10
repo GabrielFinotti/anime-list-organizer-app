@@ -152,6 +152,88 @@ const AnimeForm = () => {
     }));
   };
 
+  const handleAddMovie = () => {
+    const input = document.getElementById("movies") as HTMLInputElement;
+    const value = input?.value.trim();
+    if (value) {
+      setFormData((prevData) => ({
+        ...prevData,
+        derivate: {
+          movies: [...(prevData.derivate?.movies || []), value],
+          ovas: prevData.derivate?.ovas || [],
+          specials: prevData.derivate?.specials || [],
+        },
+      }));
+      input.value = "";
+    }
+  };
+
+  const handleAddOva = () => {
+    const input = document.getElementById("ovas") as HTMLInputElement;
+    const value = input?.value.trim();
+    if (value) {
+      setFormData((prevData) => ({
+        ...prevData,
+        derivate: {
+          movies: prevData.derivate?.movies || [],
+          ovas: [...(prevData.derivate?.ovas || []), value],
+          specials: prevData.derivate?.specials || [],
+        },
+      }));
+      input.value = "";
+    }
+  };
+
+  const handleAddSpecial = () => {
+    const input = document.getElementById("specials") as HTMLInputElement;
+    const value = input?.value.trim();
+    if (value) {
+      setFormData((prevData) => ({
+        ...prevData,
+        derivate: {
+          movies: prevData.derivate?.movies || [],
+          ovas: prevData.derivate?.ovas || [],
+          specials: [...(prevData.derivate?.specials || []), value],
+        },
+      }));
+      input.value = "";
+    }
+  };
+
+  const handleRemoveMovie = (index: number) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      derivate: {
+        movies: prevData.derivate?.movies?.filter((_, i) => i !== index) || [],
+        ovas: prevData.derivate?.ovas || [],
+        specials: prevData.derivate?.specials || [],
+      },
+    }));
+  };
+
+  const handleRemoveOva = (index: number) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      derivate: {
+        movies: prevData.derivate?.movies || [],
+        ovas: prevData.derivate?.ovas?.filter((_, i) => i !== index) || [],
+        specials: prevData.derivate?.specials || [],
+      },
+    }));
+  };
+
+  const handleRemoveSpecial = (index: number) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      derivate: {
+        movies: prevData.derivate?.movies || [],
+        ovas: prevData.derivate?.ovas || [],
+        specials:
+          prevData.derivate?.specials?.filter((_, i) => i !== index) || [],
+      },
+    }));
+  };
+
   return (
     <form className={style.form} onSubmit={handleSubmit}>
       <h1>Adicionar Anime</h1>
@@ -172,13 +254,15 @@ const AnimeForm = () => {
           value={formData.synopsis}
           onChange={handleChange}
         />
-        <SelectInput
-          name="category"
-          label="Categoria"
-          options={categoryOptions}
-          value={formData.category.name}
-          onChange={handleCategoryChange}
-        />
+        <div className={style.categoryBox}>
+          <SelectInput
+            name="category"
+            label="Categoria"
+            options={categoryOptions}
+            value={formData.category.name}
+            onChange={handleCategoryChange}
+          />
+        </div>
         <div className={style.selectBox}>
           <SelectInput
             name="genres"
@@ -261,6 +345,92 @@ const AnimeForm = () => {
             />
             É Adulto?
           </label>
+        </div>
+        <div className={style.derivateBox}>
+          <h2>Derivados</h2>
+          <div className={style.derivateInputs}>
+            <div className={style.inputWithButton}>
+              <DefaultInput
+                label="Filmes"
+                id="movies"
+                type="text"
+                placeholder="Nome do filme..."
+              />
+              <button
+                type="button"
+                className={style.addButton}
+                onClick={handleAddMovie}
+              >
+                Adicionar
+              </button>
+            </div>
+            <div className={style.derivateList}>
+              {formData.derivate?.movies?.map((movie, index) => (
+                <div key={index} className={style.derivateItem}>
+                  <span>{movie}</span>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveMovie(index)}
+                  >
+                    Remover
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className={style.inputWithButton}>
+              <DefaultInput
+                label="OVAs"
+                id="ovas"
+                type="text"
+                placeholder="Nome do OVA..."
+              />
+              <button
+                type="button"
+                className={style.addButton}
+                onClick={handleAddOva}
+              >
+                Adicionar
+              </button>
+            </div>
+            <div className={style.derivateList}>
+              {formData.derivate?.ovas?.map((ova, index) => (
+                <div key={index} className={style.derivateItem}>
+                  <span>{ova}</span>
+                  <button type="button" onClick={() => handleRemoveOva(index)}>
+                    Remover
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className={style.inputWithButton}>
+              <DefaultInput
+                label="Especiais"
+                id="specials"
+                type="text"
+                placeholder="Nome do especial..."
+              />
+              <button
+                type="button"
+                className={style.addButton}
+                onClick={handleAddSpecial}
+              >
+                Adicionar
+              </button>
+            </div>
+            <div className={style.derivateList}>
+              {formData.derivate?.specials?.map((special, index) => (
+                <div key={index} className={style.derivateItem}>
+                  <span>{special}</span>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveSpecial(index)}
+                  >
+                    Remover
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
         <div className={style.selectBox}>
           <SelectInput

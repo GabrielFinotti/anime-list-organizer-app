@@ -22,9 +22,15 @@
 
         margin: 20px 0;
         padding: 0 20px;
-        height: calc(100vh - 248px);
 
-        overflow: auto;
+        .categoryBox,
+        .derivateBox {
+            background-color: rgb(22, 21, 21);
+            border: 1px solid rgba(255, 255, 255, 0.575);
+            border-radius: 20px;
+
+            padding: 20px;
+        }
 
         .selectBox,
         .checkboxBox {
@@ -58,6 +64,80 @@
 
                     accent-color: rgb(7, 7, 7);
                     cursor: pointer;
+                }
+            }
+        }
+
+        .derivateBox {
+            h2 {
+                padding-bottom: 30px;
+
+                text-align: center;
+                font-size: 20px;
+                font-weight: 500;
+            }
+
+            .derivateInputs {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                .inputWithButton {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+
+                    .addButton {
+                        background-color: rgb(7, 7, 7);
+                        border: 1px solid rgba(255, 255, 255, 0.575);
+                        border-radius: 8px;
+
+                        padding: 10px;
+
+                        color: white;
+                        font-weight: 500;
+
+                        cursor: pointer;
+                        transition: all 0.2s;
+                    }
+                }
+
+                .derivateList {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    .derivateItem {
+                        background-color: rgba(255, 255, 255, 0.1);
+                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        border-radius: 8px;
+
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        padding: 8px;
+
+                        span {
+                            font-size: 14px;
+                            font-weight: 400;
+                        }
+
+                        & > button {
+                            background-color: #ff4444;
+                            border: none;
+                            border-radius: 4px;
+
+                            margin: 0;
+                            padding: 8px;
+
+                            color: white;
+                            font-size: 14px;
+
+                            cursor: pointer;
+                            transition: background-color 0.2s;
+                        }
+                    }
                 }
             }
         }
