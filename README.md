@@ -1,53 +1,534 @@
-# Anime List Organizer
+# 🎌 Anime List Organizer
 
-## Sistema de Gerenciamento de Animes - Frontend v2.0.0
+<div align="center">
+
+![Anime List Organizer Logo](https://via.placeholder.com/200x200?text=🎌)
+
+**Sistema moderno de organização e gerenciamento de animes**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Development Status](https://img.shields.io/badge/Status-Active%20Development-green.svg)](https://github.com/GabrielFinotti/anime-list-organizer-app)
 [![Version](https://img.shields.io/badge/Version-2.0.0-purple.svg)](https://github.com/GabrielFinotti/anime-list-organizer-app/releases)
-
-**Framework & Tecnologias:**
-
 [![Next.js](https://img.shields.io/badge/Next.js-15.5.2-black?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.1.0-61dafb?logo=react&logoColor=white)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![SASS](https://img.shields.io/badge/SASS-Modules-cc6699?logo=sass&logoColor=white)](https://sass-lang.com/)
 
-**Requisitos & Suporte:**
+*Aplicação web responsiva para organização e acompanhamento estruturado da sua lista de animes pessoal.*
 
-[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Mobile First](https://img.shields.io/badge/Design-Mobile%20First-orange)](https://developers.google.com/web/fundamentals/design-and-ux/responsive)
-[![PWA Ready](https://img.shields.io/badge/PWA-Ready-yellow?logo=pwa)](https://web.dev/progressive-web-apps/)
+[🚀 Demo](#demo) • [📖 Documentação](#documentação) • [🔧 Instalação](#instalação) • [🤝 Contribuir](#contribuição)
+
+</div>
 
 ---
-
-*Aplicação frontend para organização e acompanhamento estruturado de animes. Interface otimizada para mobile-first com preparação para expansão desktop e recursos PWA.*
 
 ## 📋 Índice
 
-- [📌 Visão Geral](#-visão-geral)
-- [⚡ Features Principais](#-features-principais)
+- [📌 Sobre o Projeto](#-sobre-o-projeto)
+- [✨ Funcionalidades](#-funcionalidades)
+- [🛠️ Tecnologias](#-tecnologias)
 - [🏗️ Arquitetura](#-arquitetura)
+- [� Instalação e Configuração](#-instalação-e-configuração)
+- [� Como Usar](#-como-usar)
+- [🌐 API Integration](#-api-integration)
 - [📁 Estrutura do Projeto](#-estrutura-do-projeto)
-- [🚀 Quick Start](#-quick-start)
-- [🔧 Configuração](#-configuração)
-- [🌐 Integração com API](#-integração-com-api)
-- [📱 Funcionalidades](#-funcionalidades)
-- [🧪 Qualidade e Testes](#-qualidade-e-testes)
+- [🎨 UI/UX Design](#-uiux-design)
+- [🔐 Segurança](#-segurança)
+- [🧪 Testes](#-testes)
+- [🚀 Deploy](#-deploy)
 - [🛣️ Roadmap](#-roadmap)
 - [🤝 Contribuição](#-contribuição)
-- [📄 Licença](#-licença)
+- [� Licença](#-licença)
+
+## 📌 Sobre o Projeto
+
+O **Anime List Organizer** é uma aplicação web moderna desenvolvida para otacos que desejam organizar, acompanhar e gerenciar sua coleção pessoal de animes de forma estruturada e eficiente.
+
+### 🎯 Objetivo
+
+Fornecer uma interface intuitiva e responsiva que permita aos usuários:
+
+- Catalogar animes assistidos, em andamento e na lista de desejados
+- Acompanhar progresso de episódios e temporadas
+- Organizar por categorias, gêneros e status
+- Buscar e descobrir novos animes através de scraping externo
+- Manter registros detalhados com sinopses, datas e derivados
+
+## ✨ Funcionalidades
+
+### 🏠 Dashboard Principal
+
+- **Lista de Animes**: Visualização organizada de toda sua coleção
+- **Busca Avançada**: Filtros por categoria, gênero, status e tipo
+- **Cards Detalhados**: Informações completas de cada anime
+- **Status de Progresso**: Acompanhamento de episódios e temporadas
+
+### ➕ Gerenciamento de Animes
+
+- **Adicionar Manualmente**: Formulário completo para cadastro
+- **Scraping Automático**: Busca de dados via lookup externo
+- **Edição Detalhada**: Atualização de informações e progresso
+- **Categorização**: Organização por gêneros, categorias e status
+
+### 🔍 Recursos de Busca
+
+- **Lookup Inteligente**: Integração com APIs externas para busca de animes
+- **Filtros Múltiplos**: Combinação de critérios para busca específica
+- **Pesquisa em Tempo Real**: Resultados instantâneos conforme digitação
+- **Histórico**: Manutenção do progresso e alterações
+
+### 📱 Interface Móvel
+
+- **Design Responsivo**: Otimizado para todas as telas
+- **Navegação Intuitiva**: Menu lateral e navegação simplificada
+- **Performance**: Carregamento rápido e smooth scrolling
+- **Offline Ready**: Preparado para funcionalidades PWA
+
+## 🛠️ Tecnologias
+
+### Frontend Stack
+
+- **[Next.js 15.5.2](https://nextjs.org/)** - Framework React com App Router
+- **[React 19.1.0](https://reactjs.org/)** - Biblioteca para interfaces
+- **[TypeScript 5.x](https://www.typescriptlang.org/)** - Superset tipado do JavaScript
+- **[SASS Modules](https://sass-lang.com/)** - Preprocessador CSS com escopo local
+
+### Ferramentas de Desenvolvimento
+
+- **[ESLint](https://eslint.org/)** - Linter para JavaScript/TypeScript
+- **[Turbopack](https://turbo.build/pack)** - Bundler de alta performance
+- **[PostCSS](https://postcss.org/)** - Processamento CSS moderno
+
+### Padrões e Arquitetura
+
+- **App Router** - Sistema de roteamento do Next.js 13+
+- **Client/Server Components** - Renderização híbrida otimizada
+- **CSS Modules** - Estilização com escopo local
+- **REST API Integration** - Consumo de APIs externas
+
+## 🏗️ Arquitetura
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        Frontend (Next.js)                   │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │   Pages     │  │ Components  │  │       Lib           │  │
+│  │             │  │             │  │                     │  │
+│  │ • /login    │  │ • Forms     │  │ • API Client        │  │
+│  │ • /list     │  │ • Cards     │  │ • DTOs              │  │
+│  │ • /add      │  │ • Inputs    │  │ • Types             │  │
+│  │ • /lookup   │  │ • Headers   │  │ • Utilities         │  │
+│  │ • /data/:id │  │ • Loaders   │  │                     │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+├─────────────────────────────────────────────────────────────┤
+│                   Middleware & Auth                         │
+├─────────────────────────────────────────────────────────────┤
+│                    External API                             │
+│              (Backend separado)                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Fluxo de Dados
+
+1. **Autenticação** → Middleware verifica sessão
+2. **Páginas** → Carregam dados via API Client
+3. **Componentes** → Recebem props e gerenciam estado local
+4. **API Client** → Comunica com backend via HTTP/REST
+5. **Estado** → Gerenciado com React State e Session Storage
+
+## 🚀 Instalação e Configuração
+
+### Pré-requisitos
+
+- **Node.js** ≥ 18.0.0
+- **npm** ≥ 9.0.0 ou **yarn** ≥ 1.22.0
+- **Git** para clonagem do repositório
+
+### 1. Clonagem do Repositório
+
+```bash
+git clone https://github.com/GabrielFinotti/anime-list-organizer-app.git
+cd anime-list-organizer-app
+```
+
+### 2. Instalação de Dependências
+
+```bash
+# Com npm
+npm install
+
+# Com yarn
+yarn install
+```
+
+### 3. Configuração do Ambiente
+
+Crie um arquivo `.env.local` na raiz do projeto:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+NEXT_PUBLIC_BASIC_USERNAME=seu_usuario
+NEXT_PUBLIC_BASIC_PASSWORD=sua_senha
+```
+
+### 4. Execução em Desenvolvimento
+
+```bash
+# Com npm
+npm run dev
+
+# Com yarn
+yarn dev
+```
+
+A aplicação estará disponível em `http://localhost:3001`.
+
+### 5. Build para Produção
+
+```bash
+# Build
+npm run build
+
+# Start em produção
+npm run start
+```
+
+## 📱 Como Usar
+
+### 1. Login
+
+- Acesse a aplicação e faça login com suas credenciais
+- As credenciais são configuradas via variáveis de ambiente
+
+### 2. Navegação Principal
+
+- **Home/Lista**: Visualize todos os seus animes cadastrados
+- **Adicionar**: Cadastre novos animes manualmente
+- **Scrapper**: Busque animes automaticamente via lookup
+
+### 3. Gerenciamento de Animes
+
+- **Filtrar**: Use a barra de pesquisa e filtros avançados
+- **Editar**: Clique em um anime para editar suas informações
+- **Status**: Atualize o progresso de episódios e temporadas
+- **Categorizar**: Organize por gêneros e categorias
+
+### 4. Recursos Avançados
+
+- **Derivados**: Adicione movies, OVAs e specials relacionados
+- **Status de Publicação**: Acompanhe se o anime está em produção
+- **Material de Origem**: Registre se é baseado em manga, light novel, etc.
+
+## 🌐 API Integration
+
+### Endpoints Utilizados
+
+```typescript
+// Busca de animes
+GET /animes - Lista todos os animes
+GET /animes/:id - Busca anime específico
+GET /anime/lookup?title=:title - Lookup externo
+
+// Gerenciamento
+POST /animes - Cria novo anime
+PUT /anime/update/:id - Atualiza anime
+DELETE /anime/delete/:id - Remove anime
+
+// Metadados
+GET /categories - Lista categorias
+GET /genres - Lista gêneros
+GET /adult-genres - Lista gêneros adultos
+```
+
+### Estrutura de Dados
+
+```typescript
+interface AnimeDTO {
+  id: string;
+  name: string;
+  synopsis: string;
+  category: CategoryDTO;
+  genres: GenreDTO[];
+  adultGenres: AdultGenreDTO[];
+  typeOfMaterialOrigin: string;
+  materialOriginName: string;
+  releaseDate: string;
+  isMovie: boolean;
+  isAdult: boolean;
+  derivate?: {
+    movies: string[];
+    ovas: string[];
+    specials: string[];
+  };
+  lastReleaseSeason: number;
+  lastWatchedSeason: number;
+  lastWatchedEpisode: number;
+  actualStatus: "publishing" | "completed" | "cancelled" | "in production";
+## 📁 Estrutura do Projeto
+
+```
+
+anime-list-organizer-app/
+├── 📁 public/                    # Assets estáticos
+│   └── 📁 icons/                 # Ícones SVG
+├── 📁 src/
+│   ├── 📁 app/                   # App Router (Next.js 13+)
+│   │   ├── 📄 layout.tsx         # Layout global
+│   │   ├── 📄 page.tsx          # Página inicial (Login)
+│   │   └── 📁 anime/            # Rotas protegidas
+│   │       ├── 📄 layout.tsx    # Layout com header
+│   │       ├── 📁 add/          # Adicionar anime
+│   │       ├── 📁 data/[id]/    # Detalhes do anime
+│   │       ├── 📁 list/         # Lista de animes
+│   │       └── 📁 lookup/       # Busca externa
+│   ├── 📁 components/           # Componentes reutilizáveis
+│   │   ├── 📁 layout/           # Componentes de layout
+│   │   │   ├── 📁 cards/        # Cards de exibição
+│   │   │   ├── 📁 forms/        # Formulários
+│   │   │   └── 📁 headers/      # Cabeçalhos
+│   │   └── 📁 ui/               # Componentes de UI
+│   │       ├── 📁 inputs/       # Campos de entrada
+│   │       └── 📁 loaders/      # Indicadores de carregamento
+│   ├── 📁 lib/                  # Utilitários e APIs
+│   │   ├── 📁 api/              # Cliente da API
+│   │   └── 📁 dto/              # Data Transfer Objects
+│   └── 📄 middleware.ts         # Middleware de autenticação
+├── 📄 next.config.ts            # Configuração Next.js
+├── 📄 tsconfig.json             # Configuração TypeScript
+├── 📄 package.json              # Dependências e scripts
+└── 📄 eslint.config.mjs         # Configuração ESLint
+
+```
+
+## 🎨 UI/UX Design
+
+### Design System
+
+- **Tipografia**: Work Sans (font customizada)
+- **Cores**: Esquema dark/light mode ready
+- **Layout**: CSS Grid e Flexbox
+- **Responsividade**: Mobile-first approach
+- **Animações**: Transições suaves e micro-interações
+
+### Componentes Principais
+
+- **AnimeCard**: Card responsivo com informações do anime
+- **AnimeForm**: Formulário completo para CRUD
+- **SearchForm**: Barra de busca com filtros avançados
+- **MobileHeader**: Navegação mobile com menu lateral
+- **LoginForm**: Autenticação simples e segura
+
+## 🔐 Segurança
+
+### Autenticação
+
+- **Basic Authentication**: Credenciais via variáveis de ambiente
+- **Session Management**: Storage no browser e cookies
+- **Middleware Protection**: Rotas protegidas automaticamente
+- **Logout Automático**: Limpeza de sessão
+
+### Boas Práticas
+
+- **Environment Variables**: Dados sensíveis fora do código
+- **Input Validation**: Sanitização em formulários
+- **HTTPS Ready**: Preparado para produção segura
+- **CSP Headers**: Content Security Policy configurável
+
+## 🧪 Testes
+
+### Estrutura de Testes
+
+```bash
+# Executar linting
+npm run lint
+
+# Verificar tipos TypeScript
+npx tsc --noEmit
+
+# Build de produção (teste completo)
+npm run build
+```
+
+### Testes Planejados
+
+- [ ] **Unit Tests** - Jest + React Testing Library
+- [ ] **Integration Tests** - Cypress ou Playwright
+- [ ] **E2E Tests** - Cenários completos de usuário
+- [ ] **Performance Tests** - Lighthouse CI
+
+## 🚀 Deploy
+
+### Opções de Deploy
+
+#### Vercel (Recomendado)
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+```
+
+#### Docker
+
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+#### Netlify
+
+```bash
+# Build command
+npm run build
+
+# Publish directory
+.next
+```
+
+### Variáveis de Ambiente (Produção)
+
+```env
+NEXT_PUBLIC_API_URL=https://sua-api.com
+NEXT_PUBLIC_BASIC_USERNAME=usuario_producao
+NEXT_PUBLIC_BASIC_PASSWORD=senha_segura_producao
+```
+
+## 🛣️ Roadmap
+
+### 🚀 Versão Atual (v2.0.0)
+
+- [x] Interface mobile-first responsiva
+- [x] CRUD completo de animes
+- [x] Sistema de filtros e busca
+- [x] Integração com API externa
+- [x] Autenticação básica
+
+### 📋 Próximas Versões
+
+#### v2.1.0 - UX/UI Improvements
+
+- [ ] Dark/Light theme toggle
+- [ ] Animações e micro-interações
+- [ ] Skeleton loading states
+- [ ] Toast notifications
+- [ ] Infinite scroll na lista
+
+#### v2.2.0 - PWA & Performance
+
+- [ ] Service Worker implementação
+- [ ] Offline functionality
+- [ ] Push notifications
+- [ ] App install prompt
+- [ ] Performance optimizations
+
+#### v2.3.0 - Features Avançadas
+
+- [ ] Sistema de avaliação (rating)
+- [ ] Comentários e notas pessoais
+- [ ] Exportar/importar dados
+- [ ] Estatísticas avançadas
+- [ ] Recomendações personalizadas
+
+#### v3.0.0 - Multi-user & Social
+
+- [ ] Sistema de usuários múltiplos
+- [ ] Compartilhamento de listas
+- [ ] Rede social de otakus
+- [ ] Reviews e discussões
+- [ ] API Gateway implementação
+
+## 🤝 Contribuição
+
+Contribuições são sempre bem-vindas! Este é um projeto de código aberto e toda ajuda é valiosa.
+
+### Como Contribuir
+
+1. **Fork** o repositório
+2. **Clone** seu fork localmente
+3. **Crie uma branch** para sua feature (`git checkout -b feature/AmazingFeature`)
+4. **Commit** suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+5. **Push** para a branch (`git push origin feature/AmazingFeature`)
+6. **Abra um Pull Request**
+
+### Diretrizes de Desenvolvimento
+
+- **Code Style**: Siga as configurações do ESLint
+- **TypeScript**: Mantenha tipagem estrita
+- **Commits**: Use [Conventional Commits](https://conventionalcommits.org/)
+- **Testing**: Adicione testes para novas features
+- **Documentation**: Atualize documentação quando necessário
+
+### Tipos de Contribuição
+
+- 🐛 **Bug Reports**: Relate bugs encontrados
+- 💡 **Feature Requests**: Sugira novas funcionalidades  
+- 📖 **Documentation**: Melhore a documentação
+- 🎨 **UI/UX**: Aprimore a interface
+- 🚀 **Performance**: Otimize performance
+- 🧪 **Tests**: Adicione ou melhore testes
+
+## 📊 Status do Projeto
+
+![GitHub issues](https://img.shields.io/github/issues/GabrielFinotti/anime-list-organizer-app)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/GabrielFinotti/anime-list-organizer-app)
+![GitHub last commit](https://img.shields.io/github/last-commit/GabrielFinotti/anime-list-organizer-app)
+![GitHub contributors](https://img.shields.io/github/contributors/GabrielFinotti/anime-list-organizer-app)
+
+## 🙏 Agradecimentos
+
+- **Next.js Team** - Framework incrível e bem documentado
+- **React Community** - Ecosystem rico e ativo
+- **TypeScript Team** - Type safety que faz a diferença
+- **Sass Team** - CSS preprocessor poderoso
+- **Vercel** - Platform de deploy excepcional
+
+## 📞 Suporte e Contato
+
+- **Documentação**: [GitHub Wiki](https://github.com/GabrielFinotti/anime-list-organizer-app/wiki)
+- **Issues**: [GitHub Issues](https://github.com/GabrielFinotti/anime-list-organizer-app/issues)
+- **Discussões**: [GitHub Discussions](https://github.com/GabrielFinotti/anime-list-organizer-app/discussions)
+- **Email**: <contato@seudominio.com>
+
+## 📝 Licença
+
+Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+```
+MIT License
+
+Copyright (c) 2024 Gabriel Finotti
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
 
 ---
 
----
+<div align="center">
 
-## 📌 Visão Geral
+**[⬆ Voltar ao topo](#-anime-list-organizer)**
 
-O **Anime List Organizer** é uma aplicação frontend especializada no gerenciamento e acompanhamento de animes. Esta versão 2.0.0 representa uma refatoração completa focada em:
+Feito com ❤️ por [Gabriel Finotti](https://github.com/GabrielFinotti)
 
-- **Separação de responsabilidades**: Frontend isolado consumindo API externa
-- **Mobile-first design**: Interface otimizada para dispositivos móveis
+⭐ **Se este projeto foi útil para você, considere dar uma estrela!** ⭐
+
+</div>
+```
 - **Modularização**: Componentes reutilizáveis e arquitetura escalável
 - **Performance**: Next.js 15 + Turbopack para desenvolvimento rápido
 
@@ -70,529 +551,3 @@ O **Anime List Organizer** é uma aplicação frontend especializada no gerencia
 | **Lookup AI** | Enriquecimento automático de metadados | ✅ Ativo |
 | **Categorização** | Gêneros, demografia, origem | ✅ Ativo |
 | **Progresso Tracking** | Temporadas/episódios assistidos | ✅ Ativo |
-
-### 🎨 Interface & UX
-
-| Feature | Descrição | Status |
-|---------|-----------|--------|
-| **Mobile-First** | Design responsivo otimizado para mobile | ✅ Ativo |
-| **Formulários Modulares** | Componentes reutilizáveis de entrada | ✅ Ativo |
-| **SASS Modules** | Estilização isolada e maintível | ✅ Ativo |
-| **Cards Interativos** | Interface visual para listagem | ✅ Ativo |
-
-### 🔧 Performance & Dev
-
-| Feature | Descrição | Status |
-|---------|-----------|--------|
-| **Turbopack** | Build e HMR ultrarrápidos | ✅ Ativo |
-| **TypeScript** | Type safety completo | ✅ Ativo |
-| **App Router** | Next.js 15 com roteamento moderno | ✅ Ativo |
-
-## 🏗️ Arquitetura
-
-### Visão Alto Nível
-
-```mermaid
-graph TB
-    A[Next.js App Router] --> B[UI Components]
-    A --> C[API Client Layer]
-    
-    B --> D[Pages - /app/*]
-    B --> E[Components - Modulares]
-    B --> F[UI Primitives]
-    
-    C --> G[animeApi.ts]
-    G --> H[API Externa]
-    
-    H --> I[Basic Auth]
-    H --> J[REST Endpoints]
-    
-    style A fill:#0070f3
-    style H fill:#f9f,stroke:#333,stroke-width:2px
-```
-
-### Stack Tecnológico
-
-```text
-┌─ Frontend (Este Repo)
-│  ├─ Next.js 15.5.2 (App Router)
-│  ├─ React 19.1.0 (Client Components)
-│  ├─ TypeScript 5.x (Type Safety)
-│  ├─ SASS Modules (Styling)
-│  └─ Fetch API (HTTP Client)
-│
-└─ Backend (Repositório Separado)
-   ├─ API REST
-   ├─ Autenticação Basic Auth
-   ├─ Endpoints: animes, categorias, gêneros
-   └─ Integração Lookup AI
-```
-
-### Características Arquiteturais
-
-- **Frontend Desacoplado**: Consumo via HTTP de API externa
-- **Client-Side Filtering**: Busca em tempo real usando `useMemo`
-- **Component-Driven**: Arquitetura modular e reutilizável
-- **Mobile-First**: Design responsivo com breakpoints planejados
-- **Type-Safe**: TypeScript end-to-end com DTOs
-
-## � Estrutura do Projeto
-
-```tree
-src/
-├── app/                          # Next.js App Router
-│   ├── anime/                    # Domínio Anime
-│   │   ├── add/                  # Formulário de criação
-│   │   ├── list/                 # Listagem principal
-│   │   ├── data/[id]/            # Página de detalhes
-│   │   └── lookup/               # Lookup assistido
-│   ├── layout.tsx                # Layout raiz
-│   ├── page.tsx                  # Homepage
-│   └── globals.scss              # Estilos globais
-│
-├── components/                   # Componentes Reutilizáveis
-│   ├── layout/
-│   │   ├── forms/                # Formulários
-│   │   │   ├── animeForm/        # Criação/edição de anime
-│   │   │   ├── animeLookupForm/  # Lookup de metadados
-│   │   │   ├── searchForm/       # Busca de animes
-│   │   │   └── loginForm/        # Autenticação (futuro)
-│   │   ├── cards/
-│   │   │   └── animeCard/        # Card de exibição
-│   │   └── headers/
-│   │       └── mobileHeader/     # Header mobile
-│   └── ui/                       # Primitivos UI
-│       ├── inputs/               # Inputs reutilizáveis
-│       │   ├── defaultInput/
-│       │   ├── searchInput/
-│       │   ├── select/
-│       │   └── checkbox/
-│       └── loaders/              # Loading states
-│
-├── lib/                          # Lógica de Negócio
-│   ├── api/
-│   │   └── animeApi.ts           # Cliente HTTP API
-│   └── dto/                      # Data Transfer Objects
-│       ├── anime.dto.ts
-│       ├── category.dto.ts
-│       ├── genre.dto.ts
-│       └── adultGenre.dto.ts
-│
-└── public/                       # Assets Estáticos
-    └── icons/                    # Ícones SVG
-```
-
-### Convenções de Organização
-
-- **Colocation**: Componentes organizados por domínio/funcionalidade
-- **SASS Modules**: Um arquivo `.module.scss` por componente
-- **Type Safety**: DTOs para todas as interfaces de dados
-- **Atomic Design**: UI primitivos reutilizáveis em `/ui`
-
-## 📦 Modelo (Schema Anime)
-
-| Campo | Tipo | Obrigatório | Observações |
-|-------|------|-------------|-------------|
-| `name` | string | sim | Indexado |
-| `synopsis` | string | não | Sinopse |
-| `status` | string | não | Ex: watching, completed |
-| `category` | string[] | não | Demografia (ex: shounen) |
-| `genre` | string[] | não | Gêneros (ação, drama...) |
-| `origin` | string[] | não | Fonte (manga, original...) |
-| `namesOfOrigins` | string[] | não | Títulos originais |
-| `isMovie` | boolean | não | Se é filme |
-| `isSerieContentAnyMovie` | boolean | não | Série com filmes associados |
-| `moviesNames` | string[] | não | Lista de filmes relacionados |
-| `lastReleasedSeason` | number \| null | não | Última temporada lançada |
-| `lastWatchedSeason` | number \| null | não | Progresso do usuário |
-| `lastWatchedEpisode` | number \| null | não | Progresso do usuário |
-| `createdAt` / `updatedAt` | Date | auto | Timestamps |
-
-## 🔐 Variáveis de Ambiente
-
-| Nome | Descrição | Obrigatório | Exemplo |
-|------|-----------|------------|---------|
-| `NEXT_PUBLIC_API_URL` | Base URL da API externa | Sim | <https://api.seudominio.com> |
-| `NEXT_PUBLIC_BASIC_USERNAME` | Usuário Basic Auth para chamadas | Sim | usuario_front |
-| `NEXT_PUBLIC_BASIC_PASSWORD` | Senha Basic Auth para chamadas | Sim | senha123 |
-
-Observações:
-
-- Credenciais expostas como `NEXT_PUBLIC_*` só são aceitáveis se a API usar permissões limitadas (ideal: trocar para fluxo de autenticação por usuário em versões futuras).
-- Removidas variáveis de persistência (Mongo/OpenAI) pois pertencem agora ao repositório da API.
-
-Arquivo recomendado: `.env.local`
-
-Exemplo `.env.local`:
-
-```env
-NEXT_PUBLIC_API_URL=https://api.seudominio.com
-NEXT_PUBLIC_BASIC_USERNAME=usuario_front
-NEXT_PUBLIC_BASIC_PASSWORD=senha123
-```
-
-## ⚙️ Instalação & Execução
-
-Pré-requisitos: Node 18+ e MongoDB (local ou Atlas).
-
-```powershell
-git clone https://github.com/GabrielFinotti/Anime-list-organizer.git
-cd Anime-list-organizer
-npm install
-copy NUL .env.local 
-npm run dev
-```
-
-App: <http://localhost:3000>
-
-Build produção:
-
-```powershell
-npm run build
-npm start
-```
-
-## 🧪 Qualidade (Sugestões Futuras)
-
-- Testes unitários (Vitest/Jest) para normalizadores e handlers
-- Testes de integração com supertest / next test runner
-- ESLint + Prettier (já há lint script)
-- Configuração de CI (GitHub Actions) para lint + testes + build
-
-## 🌐 Integração com API
-
-### Cliente HTTP
-
-A comunicação com a API externa é centralizada em `src/lib/api/animeApi.ts`, implementando:
-
-- **Autenticação**: Basic Auth automatizada
-- **Error Handling**: Tratamento consistente de erros
-- **Type Safety**: Retornos tipados com DTOs
-- **Singleton Pattern**: Reutilização de configurações
-
-### Endpoints Disponíveis
-
-| Endpoint | Método | Descrição | Retorno |
-|----------|--------|-----------|---------|
-| `/animes` | GET | Lista todos os animes | `AnimeDTO[]` |
-| `/animes` | POST | Cria novo anime | `AnimeDTO` |
-| `/animes/:id` | GET | Busca anime por ID | `AnimeDTO` |
-| `/anime/update/:id` | PUT | Atualiza anime existente | `AnimeDTO` |
-| `/anime/delete/:id` | DELETE | Remove anime | `boolean` |
-| `/anime/lookup?title=` | GET | Enriquecimento AI | `AnimeDTO` |
-| `/categories` | GET | Lista categorias | `CategoryDTO[]` |
-| `/genres` | GET | Lista gêneros | `GenreDTO[]` |
-| `/adult-genres` | GET | Lista gêneros adultos | `GenreDTO[]` |
-
-### Exemplo de Uso
-
-```typescript
-import AnimeAPI from '@/lib/api/animeApi';
-
-// Buscar todos os animes
-const animes = await AnimeAPI.getAnime();
-
-// Buscar com filtro por nome
-const filteredAnimes = await AnimeAPI.getAnime('Naruto');
-
-// Criar novo anime
-const newAnime = await AnimeAPI.createAnime({
-  name: 'Attack on Titan',
-  status: 'watching',
-  genre: ['ação', 'drama'],
-  isMovie: false
-});
-```
-
-## � Funcionalidades
-
-### 🔍 Sistema de Busca
-
-**Implementação Client-Side com `useMemo`**
-
-A busca funciona em tempo real, filtrando a lista de animes já carregada:
-
-```typescript
-const filteredAnimes = useMemo(() => {
-  if (!searchTerm) return animes;
-  
-  return animes.filter(anime => 
-    anime.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-}, [animes, searchTerm]);
-```
-
-**Características:**
-
-- ⚡ **Instantâneo**: Sem delay de rede
-- 🔄 **Reativo**: Atualiza conforme digitação
-- 📱 **Mobile-friendly**: Otimizado para touch
-- 💾 **Cache-friendly**: Usa dados já carregados
-
-### 📝 Formulários Modulares
-
-- **AnimeForm**: Criação e edição com validação
-- **SearchForm**: Busca com debounce automático
-- **LookupForm**: Enriquecimento via AI
-- **Inputs Reutilizáveis**: Checkbox, Select, DefaultInput
-
-### 🎨 Interface Adaptiva
-
-- **AnimeCard**: Cards responsivos para listagem
-- **Mobile Header**: Navegação otimizada
-- **Loading States**: Feedback visual consistente
-- **Error Boundaries**: Tratamento elegante de erros
-
-## � Qualidade e Testes
-
-### Status Atual
-
-| Área | Implementado | Planejado |
-|------|-------------|-----------|
-| **Linting** | ✅ ESLint + Next.js rules | Prettier integration |
-| **Type Safety** | ✅ TypeScript strict | API schema validation |
-| **Testes Unitários** | ❌ Não implementado | Vitest + Testing Library |
-| **Testes E2E** | ❌ Não implementado | Playwright |
-| **CI/CD** | ❌ Não implementado | GitHub Actions |
-
-### Configuração de Qualidade
-
-```json
-{
-  "extends": ["next/core-web-vitals"],
-  "rules": {
-    "prefer-const": "error",
-    "no-unused-vars": "warn"
-  }
-}
-```
-
-### Próximos Passos
-
-1. **Testes Unitários**: Componentes e funções utilitárias
-2. **Testes de Integração**: Fluxos completos de CRUD
-3. **Coverage Reports**: Metas de cobertura de código
-4. **Performance Testing**: Core Web Vitals monitoring
-
-## �️ Roadmap
-
-### 🚀 Curto Prazo (Q1 2025)
-
-**Design & UX**
-
-- [ ] **Design Responsivo Desktop**
-  - Breakpoints: sm(480px), md(768px), lg(1024px), xl(1280px)
-  - Grid layouts adaptáveis
-  - Ajustes tipográficos para telas grandes
-
-- [ ] **Progressive Web App (PWA)**
-  - Manifest com ícones multi-resolução
-  - Service Worker com estratégias de cache
-  - Instalação offline
-  - Notificações push (opcional)
-
-- [ ] **Acessibilidade (a11y)**
-  - Roles ARIA completos
-  - Navegação por teclado
-  - Contraste WCAG AA
-  - Screen reader optimization
-
-### 🎯 Médio Prazo (Q2-Q3 2025)
-
-**Funcionalidades Core**
-
-- [ ] **Sistema de Autenticação**
-  - Login/registro por usuário
-  - JWT tokens
-  - Sessões persistentes
-  - Perfis personalizados
-
-- [ ] **Funcionalidades Avançadas**
-  - Paginação e infinite scroll
-  - Filtros complexos (gênero, status, ano)
-  - Sistema de tags personalizadas
-  - Busca avançada com operadores
-
-- [ ] **Produtividade**
-  - Exportar/importar (JSON, CSV)
-  - Backup automático
-  - Sincronização entre dispositivos
-  - Estatísticas de visualização
-
-### 🔮 Longo Prazo (Q4 2025+)
-
-**Inovação & Escalabilidade**
-
-- [ ] **Modo Offline Completo**
-  - Sincronização diferida
-  - Conflict resolution
-  - Background sync
-  - Persistent storage
-
-- [ ] **Internacionalização**
-  - Suporte pt-BR / en-US
-  - RTL languages
-  - Localização de datas/números
-  - Content localization
-
-- [ ] **AI & Analytics**
-  - Recomendações personalizadas
-  - Analytics de progresso
-  - Previsão de tempo para completion
-  - Trends de consumo
-
-### 📋 Detalhes Técnicos PWA
-
-**Manifest Features:**
-
-```json
-{
-  "name": "Anime List Organizer",
-  "short_name": "AnimeList",
-  "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "#0070f3",
-  "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192" },
-    { "src": "/icon-512.png", "sizes": "512x512" }
-  ]
-}
-```
-
-**Service Worker Strategy:**
-
-- **Shell**: Cache-first (app shell, assets estáticos)
-- **API Data**: Stale-while-revalidate (dados dinâmicos)
-- **Images**: Cache-first com fallback
-- **Offline**: Página offline customizada
-
-## 🤝 Contribuição
-
-### Como Contribuir
-
-Contribuições são bem-vindas! Siga estes passos:
-
-1. **Fork** o repositório
-2. **Clone** seu fork localmente
-3. **Crie** uma branch para sua feature (`git checkout -b feat/nova-feature`)
-4. **Commit** suas mudanças (`git commit -m 'feat: adiciona nova feature'`)
-5. **Push** para a branch (`git push origin feat/nova-feature`)
-6. **Abra** um Pull Request
-
-### Padrões de Commit
-
-Seguimos [Conventional Commits](https://www.conventionalcommits.org/):
-
-```bash
-feat: nova funcionalidade
-fix: correção de bug
-docs: alterações na documentação
-style: formatação, lint
-refactor: refatoração de código
-test: adição/correção de testes
-chore: tasks de build, deps, etc
-```
-
-### Checklist para PRs
-
-- [ ] **Build** passa (`npm run build`)
-- [ ] **Lint** limpo (`npm run lint`)
-- [ ] **TypeScript** sem erros
-- [ ] **Testes** passando (quando implementados)
-- [ ] **Documentação** atualizada
-- [ ] **Screenshots** para mudanças visuais
-
-### Issues & Bugs
-
-- Use **templates** provided para issues
-- Inclua **passos** para reproduzir
-- Adicione **screenshots** quando relevante
-- Marque **labels** apropriadas
-
-### Discussões Técnicas
-
-Para discussões sobre:
-
-- Arquitetura e design patterns
-- Escolhas tecnológicas
-- Performance e otimizações
-- Roadmap e features
-
-Use [GitHub Discussions](https://github.com/GabrielFinotti/anime-list-organizer-app/discussions)
-
-## 📄 Licença
-
-Este projeto está licenciado sob a **MIT License**.
-
-```text
-MIT License
-
-Copyright (c) 2025 Gabriel Finotti
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-### Termos de Uso
-
-- ✅ **Uso comercial** permitido
-- ✅ **Modificação** permitida
-- ✅ **Distribuição** permitida
-- ✅ **Uso privado** permitido
-- ❌ **Liability** não assumida
-- ❌ **Warranty** não fornecida
-
----
-
-## 🙋 Suporte & Contato
-
-### Precisa de Ajuda?
-
-- 📖 **Documentação**: Consulte este README primeiro
-- 🐛 **Bug Report**: [Abra uma Issue](https://github.com/GabrielFinotti/anime-list-organizer-app/issues/new?template=bug_report.md)
-- 💡 **Feature Request**: [Sugira uma Feature](https://github.com/GabrielFinotti/anime-list-organizer-app/issues/new?template=feature_request.md)
-- 💬 **Discussão**: [GitHub Discussions](https://github.com/GabrielFinotti/anime-list-organizer-app/discussions)
-
-### Desenvolvedor
-
-**Gabriel Henrique Finotti**
-
-### Stats do Projeto
-
-![GitHub stars](https://img.shields.io/github/stars/GabrielFinotti/anime-list-organizer-app?style=social)
-![GitHub forks](https://img.shields.io/github/forks/GabrielFinotti/anime-list-organizer-app?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/GabrielFinotti/anime-list-organizer-app?style=social)
-
----
-
-<details>
-<summary>📊 Estatísticas de Desenvolvimento</summary>
-
-- **Primeira versão**: 2025
-- **Versão atual**: 2.0.0
-- **Linguagem principal**: TypeScript
-- **Framework**: Next.js
-- **Última atualização**: Setembro 2025
-
-</details>
-
----
-
-> **Dica**: Quer contribuir mas não sabe por onde começar? Procure por issues marcadas com `good-first-issue` ou `help-wanted`!
-
-*Obrigado por usar o Anime List Organizer! 🎌*
