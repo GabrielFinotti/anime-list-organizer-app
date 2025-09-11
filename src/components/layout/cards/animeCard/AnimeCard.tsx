@@ -33,7 +33,7 @@ const AnimeCard = ({
       setIsLoading(true);
 
       try {
-        const getAnimes = await AnimeAPI.getAnime("");
+        const getAnimes = await AnimeAPI.getAnime();
 
         setAnimes(getAnimes);
       } catch (error) {
