@@ -1,0 +1,36 @@
+.inputBox {
+    background-color: rgb(22, 21, 21);
+    border: 1px solid rgba(255, 255, 255, 0.575);
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    padding: 20px;
+
+    label {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    input {
+        background-color: black;
+        border: 1px solid rgba(255, 255, 255, 0.438);
+        border-radius: 10px;
+        outline: none;
+
+        padding: 10px;
+        width: 100%;
+
+        color: white;
+        font-weight: 200;
+
+        transition: all 300ms ease;
+        appearance: none;
+
+        &:focus {
+            border: 1px solid rgb(255, 255, 255);
+        }
+    }
+}

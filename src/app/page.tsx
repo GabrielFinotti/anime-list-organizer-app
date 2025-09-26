@@ -1,21 +1,10 @@
-"use client";
-
-import { useState } from "react";
-import Form, { FormData } from "@/components/layout/forms/Form";
-import Search from "@/components/ui/inputs/search/Search";
+import LoginForm from "@/components/layout/forms/loginForm/LoginForm";
 
 const Page = () => {
-  const [initialData, setInitialData] = useState<Partial<FormData> | undefined>(
-    undefined
-  );
-
   return (
-    <>
-      <main>
-        <Search onResult={setInitialData} />
-        <Form initialData={initialData} />
-      </main>
-    </>
+    <main>
+      <LoginForm />
+    </main>
   );
 };
 

@@ -1,0 +1,19 @@
+.box {
+    background-color: rgb(22, 21, 21);
+    border: 1px solid rgba(255, 255, 255, 0.575);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.box h2 {
+    padding-bottom: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.lists {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
